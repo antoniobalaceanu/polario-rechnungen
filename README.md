@@ -1,5 +1,7 @@
 # Polario Rechnungen
 
-Installierbare Web-App (PWA) zum Schreiben und Verwalten von Rechnungen – M G Autozentrum / Polario.
+Web-App zum Schreiben und Verwalten von Rechnungen – M G Autozentrum / Polario.
 
-Die Rechnungsdaten werden nur lokal im Browser bzw. in der installierten App gespeichert.
+Läuft direkt im Browser (Handy oder Computer), keine Installation nötig.
+Alle Rechnungen und Einstellungen liegen zentral in einer Supabase-Datenbank –
+jeder mit dem Link sieht dieselben Rechnungen und dieselbe fortlaufende Nummer.
