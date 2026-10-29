@@ -226,6 +226,62 @@
   .backup-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--gray);}
   .storage-info{font-size:12px;color:var(--gray);background:var(--box-bg);border:1px solid #e6e1d6;border-radius:4px;padding:8px 10px;margin-bottom:12px;line-height:1.5;}
 
+  /* ---------- Proformarechnung (zweite Dokumentart) ---------- */
+  .doctype-bar{max-width:794px;margin:0 auto 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--gray);}
+  .doctype-bar .seg{display:flex;border:1px solid #cfc9bc;border-radius:6px;overflow:hidden;background:#fff;}
+  .doctype-bar .seg button{font:inherit;font-size:12.5px;font-weight:600;border:none;background:transparent;color:var(--gray);padding:7px 14px;cursor:pointer;}
+  .doctype-bar .seg button + button{border-left:1px solid #e3ded3;}
+  .doctype-bar .seg button.active{background:var(--gold);color:#fff;}
+  .doctype-bar .seg button:focus-visible{outline:2px solid var(--gold-light);outline-offset:-2px;}
+
+  .pf-page{font-size:13px;line-height:1.5;color:#1a1a1a;}
+  .pf-page input, .pf-page [contenteditable]{font-size:13px;}
+  .pf-head{display:flex;justify-content:flex-end;}
+  .pf-wordmark{font-size:34px;font-weight:700;letter-spacing:-.015em;color:#5f6b64;line-height:1;}
+  .pf-sender{font-size:9.5px;color:#444;margin:34px 0 10px;display:inline-block;}
+  .pf-top{display:flex;gap:28px;align-items:flex-start;}
+  .pf-recipient{flex:1;min-width:0;}
+  .pf-recipient input{display:block;width:100%;max-width:300px;font-size:14.5px;margin-bottom:2px;}
+  .pf-meta{flex:0 0 48%;}
+  .pf-meta-row{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:2px 0;}
+  .pf-meta-row input{text-align:right;width:56%;font-size:13px;}
+  .pf-meta-row.head{font-size:15.5px;font-weight:700;margin-bottom:4px;}
+  .pf-meta-row.head input{font-size:15.5px;font-weight:700;}
+  .pf-title{font-size:19px;font-weight:700;margin:26px 0 4px;}
+  .pf-subtitle{font-size:11px;color:#333;}
+  .pf-salutation{margin-top:18px;}
+  .pf-intro{margin-top:6px;}
+  table.pf-items{width:100%;border-collapse:collapse;margin-top:20px;}
+  table.pf-items thead th{font-size:12px;font-weight:700;text-align:left;padding:0 6px 6px;border-bottom:1.5px solid #1a1a1a;}
+  table.pf-items thead th.qty, table.pf-items thead th.price, table.pf-items thead th.sum{text-align:right;}
+  table.pf-items tbody td{padding:12px 6px 4px;vertical-align:top;font-size:13px;}
+  table.pf-items tbody td.pos{width:34px;}
+  table.pf-items tbody td.qty{text-align:right;white-space:nowrap;width:68px;}
+  table.pf-items tbody td.price{text-align:right;white-space:nowrap;width:115px;font-variant-numeric:tabular-nums;}
+  table.pf-items tbody td.sum{text-align:right;white-space:nowrap;width:115px;font-variant-numeric:tabular-nums;}
+  table.pf-items tbody td.del{width:24px;text-align:right;}
+  table.pf-items td.desc input{width:100%;}
+  table.pf-items td.qty input{width:38px;text-align:right;}
+  table.pf-items td.price input{width:72px;text-align:right;}
+  .pf-details{margin-top:2px;line-height:1.45;font-size:12.5px;}
+  .pf-sums{margin-left:auto;width:56%;margin-top:18px;border-top:1.5px solid #1a1a1a;padding-top:8px;}
+  .pf-sum-row{display:flex;justify-content:space-between;gap:16px;padding:3px 6px;font-variant-numeric:tabular-nums;}
+  .pf-sum-row[hidden]{display:none;}
+  .pf-sum-row.total{font-weight:700;font-size:14.5px;padding-top:6px;}
+  .pf-vat-ctl{display:block;margin-top:10px;font-size:12px;color:var(--gray);}
+  .pf-vat-ctl select{font:inherit;font-size:12px;padding:4px 7px;border:1px solid #ccc;border-radius:4px;background:#fff;color:var(--dark);}
+  .pf-warn{margin-top:8px;font-size:11.5px;color:#8a5a12;background:#fdf6e6;border:1px solid #efe0bd;border-radius:5px;padding:8px 10px;line-height:1.45;}
+  .pf-terms-title, .pf-pay-head{font-weight:700;margin-top:20px;}
+  .pf-pay-head{margin-top:18px;}
+  .pf-terms{margin-top:4px;}
+  .pf-pay input{display:block;width:100%;max-width:430px;}
+  .pf-bank{margin-top:2px;}
+  .pf-closing{margin-top:20px;}
+  .pf-signer{white-space:pre-line;}
+  .pf-foot{display:flex;gap:16px;margin-top:34px;font-size:9.5px;color:#444;line-height:1.55;}
+  .pf-foot .col{flex:1;min-width:0;}
+  .pf-badge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.06em;background:#efe7d6;color:#7f5f27;border-radius:3px;padding:1px 4px;margin-right:5px;vertical-align:1px;}
+
   /* ---------- Mobile: App-Ansicht ---------- */
   .m-label, .m-only, .m-bar{display:none;}
   body.is-mobile .toolbar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:6px;padding:8px 10px;scrollbar-width:none;}
@@ -320,11 +376,39 @@
   body.m-edit .page-actions button{flex:1;padding:11px;font-size:13px;border-radius:8px;}
   body.m-edit .page-actions #page-info{text-align:center;}
 
+  body.m-edit .pf-head, body.m-edit .pf-sender, body.m-edit .pf-foot, body.m-edit .pf-signer, body.m-edit .pf-bank{display:none;}
+  body.m-edit .pf-top{display:block;}
+  body.m-edit .pf-meta{flex:none;}
+  body.m-edit .pf-meta-row, body.m-edit .pf-meta-row.head{display:block;padding:0;font-size:inherit;font-weight:400;margin:0;}
+  body.m-edit .pf-meta-row > span{display:block;font-size:11px;font-weight:600;color:var(--gray);letter-spacing:.04em;text-transform:uppercase;margin:10px 0 4px;}
+  body.m-edit .pf-meta-row input, body.m-edit .pf-meta-row.head input{text-align:left;width:100%;font-size:16px;font-weight:400;}
+  body.m-edit .pf-title{font-size:17px;margin:0 0 6px;}
+  body.m-edit .pf-recipient input{max-width:none;}
+  body.m-edit .pf-subtitle, body.m-edit .pf-salutation, body.m-edit .pf-intro, body.m-edit .pf-terms, body.m-edit .pf-closing{margin-top:0;}
+  body.m-edit table.pf-items{display:block;margin-top:6px;}
+  body.m-edit table.pf-items thead{display:none;}
+  body.m-edit table.pf-items tbody{display:block;}
+  body.m-edit table.pf-items tbody tr{display:block;position:relative;border:1px solid #e6e1d7;border-radius:10px;padding:10px 12px;margin-bottom:10px;background:#fbfaf8;}
+  body.m-edit table.pf-items tbody td{display:block;width:auto;padding:0;font-size:inherit;text-align:left;white-space:normal;}
+  body.m-edit table.pf-items tbody td::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;color:var(--gray);letter-spacing:.04em;text-transform:uppercase;margin:10px 0 4px;}
+  body.m-edit table.pf-items tbody td.pos{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.08em;}
+  body.m-edit table.pf-items tbody td.pos::before{content:'Position ';display:inline;font-size:inherit;color:inherit;font-weight:inherit;margin:0;}
+  body.m-edit table.pf-items tbody td input{width:100%;text-align:left;}
+  body.m-edit table.pf-items tbody td .unit{display:none;}
+  body.m-edit table.pf-items tbody td.sum{display:flex;justify-content:space-between;align-items:baseline;border-top:1px dashed #e0dbd0;padding-top:8px;margin-top:10px;font-size:15px;font-weight:600;}
+  body.m-edit table.pf-items tbody td.sum::before{margin:0;}
+  body.m-edit table.pf-items tbody td.del{position:absolute;top:4px;right:4px;width:auto;}
+  body.m-edit table.pf-items tbody td.del::before{display:none;}
+  body.m-edit table.pf-items tbody td.del button{font-size:22px;padding:4px 10px;}
+  body.m-edit .pf-sums{width:100%;margin-top:12px;}
+  body.m-edit .pf-pay input{max-width:none;}
+  body.m-edit .pf-terms-title, body.m-edit .pf-pay-head{margin-top:0;}
+
   /* Vorschau: exakt die Desktop-/PDF-Darstellung, auf Bildschirmbreite verkleinert */
   body.m-preview .page-wrap{padding:10px 10px 120px;}
   body.m-preview .page{width:794px;max-width:none;zoom:var(--pz,0.45);}
   body.m-preview .page input, body.m-preview .page [contenteditable], body.m-preview .editable-block{pointer-events:none;}
-  body.m-preview #page .no-print{display:none!important;}
+  body.m-preview #page .no-print, body.m-preview #page-pf .no-print{display:none!important;}
   body.m-preview [contenteditable]:empty{display:none;}
   body.m-preview .page-actions{display:none;}
 
@@ -333,6 +417,9 @@
   body.pdf-mode{background:#fff;}
   body.pdf-mode .page-wrap{padding:0;}
   body.pdf-mode .page{box-shadow:none;width:210mm;max-width:210mm;margin:0;padding:14mm 16mm;zoom:1;}
+  body.pdf-mode .pf-page{padding:14mm 18mm 10mm;}
+  body.pdf-mode .doctype-bar{display:none!important;}
+  body.pdf-mode .pf-foot, body.pdf-mode .pf-sums, body.pdf-mode .pf-pay, body.pdf-mode .pf-terms{page-break-inside:avoid;break-inside:avoid;}
   body.pdf-mode input, body.pdf-mode [contenteditable]{background:transparent!important;outline:none!important;}
   body.pdf-mode [contenteditable]:empty{display:none;}
   body.pdf-mode input::placeholder{color:transparent;}
@@ -344,7 +431,7 @@
 
   @media print{
     html,body{background:#fff;}
-    .toolbar, .archive, .no-print, .page-actions, .modal-bg{display:none!important;}
+    .toolbar, .archive, .no-print, .page-actions, .modal-bg, .doctype-bar{display:none!important;}
     .page-wrap{padding:0;}
     .page{box-shadow:none;max-width:none;margin:0;padding:14mm 16mm;}
     input, [contenteditable]{background:transparent!important;outline:none!important;}
@@ -381,6 +468,15 @@
 </div>
 
 <div class="page-wrap">
+
+<div class="doctype-bar no-print">
+  <span>Art des Dokuments:</span>
+  <span class="seg">
+    <button type="button" data-doctype="rechnung" class="active">Rechnung</button>
+    <button type="button" data-doctype="proforma">Proformarechnung</button>
+  </span>
+</div>
+
 <div class="page" id="page">
 
   <div class="header-band">
@@ -496,6 +592,113 @@
 
 </div>
 
+<div class="page pf-page" id="page-pf" hidden>
+
+  <div class="pf-head">
+    <div class="pf-wordmark editable-block" id="pf-wordmark" title="Firmenname ändern (Einstellungen)"></div>
+  </div>
+
+  <div class="pf-sender editable-block" id="pf-sender" title="Firmendaten bearbeiten (Einstellungen)"></div>
+
+  <div class="pf-top">
+    <div class="pf-recipient sec">
+      <div class="label m-only">Empfänger</div>
+      <span class="m-label">Firma / Name</span>
+      <input id="pf-k-name" placeholder="Firma / Name" autocomplete="off">
+      <span class="m-label">Straße Hausnummer</span>
+      <input id="pf-k-street" placeholder="Straße Hausnummer" autocomplete="off">
+      <span class="m-label">PLZ Ort</span>
+      <input id="pf-k-city" placeholder="PLZ Ort" autocomplete="off">
+      <span class="m-label">Land</span>
+      <input id="pf-k-country" placeholder="Land" autocomplete="off">
+    </div>
+    <div class="pf-meta sec">
+      <div class="label m-only">Proforma-Details</div>
+      <div class="pf-meta-row head"><span>Proforma-Nr.</span><input id="pf-no" placeholder="PF-1001" autocomplete="off"></div>
+      <div class="dup-warn no-print" id="pf-dup-warn" hidden>Diese Nummer ist bereits vergeben!</div>
+      <div class="pf-meta-row"><span>Proformadatum</span><input id="pf-date" placeholder="TT.MM.JJJJ" autocomplete="off"></div>
+      <div class="pf-meta-row"><span>Ansprechpartner</span><input id="pf-contact" placeholder="Name" autocomplete="off"></div>
+      <div class="pf-meta-row"><span>Telefon</span><input id="pf-phone" placeholder="Telefon" autocomplete="off"></div>
+    </div>
+  </div>
+
+  <div class="sec pf-title-sec">
+    <h1 class="pf-title">Proformarechnung Nr. <span id="pf-title-no"></span></h1>
+    <span class="m-label">Untertitel</span>
+    <div class="pf-subtitle" id="pf-subtitle" contenteditable="true" data-placeholder="Untertitel …"></div>
+  </div>
+
+  <div class="sec pf-intro-sec">
+    <span class="m-label">Anrede</span>
+    <div class="pf-salutation" id="pf-salutation" contenteditable="true" data-placeholder="Sehr geehrte Damen und Herren,"></div>
+    <span class="m-label">Einleitung</span>
+    <div class="pf-intro" id="pf-intro" contenteditable="true" data-placeholder="Einleitungstext …"></div>
+  </div>
+
+  <div class="sec pf-items-sec">
+    <div class="label m-only">Positionen</div>
+    <div class="items-wrap">
+      <table class="pf-items">
+        <thead>
+          <tr>
+            <th class="pos">Pos.</th>
+            <th>Beschreibung</th>
+            <th class="qty">Menge</th>
+            <th class="price">Einzelpreis</th>
+            <th class="sum">Gesamt</th>
+            <th class="no-print"></th>
+          </tr>
+        </thead>
+        <tbody id="pf-items-body"></tbody>
+      </table>
+    </div>
+    <div class="add-row no-print"><button id="pf-add-row" type="button">+ Position hinzufügen</button></div>
+
+    <div class="pf-sums">
+      <div class="pf-sum-row"><span>Summe netto</span><span id="pf-net">0,00 EUR</span></div>
+      <div class="pf-sum-row" id="pf-vat-row"><span>zzgl. <span id="pf-vat-label">19</span> % Umsatzsteuer</span><span id="pf-vat-amount">0,00 EUR</span></div>
+      <div class="pf-sum-row total"><span id="pf-total-label">Gesamtbetrag brutto</span><span id="pf-gross">0,00 EUR</span></div>
+    </div>
+
+    <label class="pf-vat-ctl no-print">Umsatzsteuer:
+      <select id="pf-vat">
+        <option value="19">19 % ausweisen</option>
+        <option value="7">7 % ausweisen</option>
+        <option value="0">keine Umsatzsteuer (Kleinunternehmer § 19 UStG)</option>
+      </select>
+    </label>
+    <div class="pf-warn no-print" id="pf-warn" hidden>Deine Rechnungen tragen den Kleinunternehmer-Hinweis nach § 19 UStG. Wer die Kleinunternehmerregelung nutzt, darf keine Umsatzsteuer ausweisen – sonst schuldet er sie nach § 14c UStG. Bitte vor dem Versenden prüfen.</div>
+  </div>
+
+  <div class="sec pf-terms-sec">
+    <span class="m-label">Überschrift Zahlungsbedingungen</span>
+    <div class="pf-terms-title" id="pf-terms-title" contenteditable="true" data-placeholder="Zahlungsbedingungen"></div>
+    <span class="m-label">Zahlungsbedingungen</span>
+    <div class="pf-terms" id="pf-terms" contenteditable="true" data-placeholder="Zahlungsbedingungen …"></div>
+
+    <div class="pf-pay">
+      <div class="pf-pay-head" id="pf-pay-head"></div>
+      <span class="m-label">Verwendungszweck</span>
+      <input id="pf-purpose" placeholder="z. B. PF-1001 / FIN …" autocomplete="off">
+      <div class="pf-bank editable-block" id="pf-bank" title="Bankdaten bearbeiten (Einstellungen)"></div>
+    </div>
+  </div>
+
+  <div class="sec pf-closing-sec">
+    <span class="m-label">Grußformel</span>
+    <div class="pf-closing" id="pf-closing" contenteditable="true" data-placeholder="Mit freundlichen Grüßen"></div>
+    <div class="pf-signer" id="pf-signer"></div>
+  </div>
+
+  <div class="pf-foot editable-block" id="pf-foot" title="Firmendaten bearbeiten (Einstellungen)">
+    <div class="col" id="pf-f1"></div>
+    <div class="col" id="pf-f2"></div>
+    <div class="col" id="pf-f3"></div>
+    <div class="col" id="pf-f4"></div>
+  </div>
+
+</div>
+
 <div class="page-actions no-print">
   <span id="page-info"></span>
   <span>
@@ -588,6 +791,27 @@
       </div>
       <div class="note" style="font-size:11.5px;color:#999;margin-top:6px;">Diese Texte kannst du auf jeder Rechnung zusätzlich direkt anklicken und individuell ändern – das betrifft dann nur diese eine Rechnung.</div>
 
+      <div class="section-title">Proformarechnung</div>
+      <div class="form-grid">
+        <div class="field"><label for="st-pf-wordmark">Schriftzug in der Kopfzeile</label><input type="text" id="st-pf-wordmark"><div class="note">Steht oben rechts auf der Proformarechnung – kein Logo.</div></div>
+        <div class="field"><label for="st-pf-signer">Zeile unter dem Namen (Unterschrift)</label><input type="text" id="st-pf-signer"></div>
+        <div class="field"><label for="st-pf-prefix">Nummernkreis (Vorsatz)</label><input type="text" id="st-pf-prefix"></div>
+        <div class="field"><label for="st-pf-start-no">Nächste Proforma-Nummer</label><input type="number" id="st-pf-start-no" min="1"></div>
+        <div class="field"><label for="st-pf-vat">Umsatzsteuer für neue Proformarechnungen</label><input type="number" id="st-pf-vat" min="0" max="100" step="0.1"><div class="note">0 = keine Umsatzsteuer (Kleinunternehmer § 19 UStG).</div></div>
+        <div class="field"><label for="st-pf-country">Land (Fußzeile)</label><input type="text" id="st-pf-country"></div>
+        <div class="field"><label for="st-pf-court">Amtsgericht (optional)</label><input type="text" id="st-pf-court"></div>
+        <div class="field"><label for="st-pf-hrno">HR-Nr. (optional)</label><input type="text" id="st-pf-hrno"></div>
+        <div class="field"><label for="st-pf-vatid">USt-IdNr. (optional)</label><input type="text" id="st-pf-vatid"></div>
+      </div>
+      <div class="form-grid" style="margin-top:10px;">
+        <div class="field full"><label for="st-pf-subtitle">Untertitel unter der Überschrift</label><textarea id="st-pf-subtitle" style="min-height:50px;"></textarea></div>
+        <div class="field"><label for="st-pf-salutation">Anrede</label><input type="text" id="st-pf-salutation"></div>
+        <div class="field"><label for="st-pf-closing">Grußformel</label><input type="text" id="st-pf-closing"></div>
+        <div class="field full"><label for="st-pf-intro">Einleitung</label><textarea id="st-pf-intro" style="min-height:50px;"></textarea></div>
+        <div class="field"><label for="st-pf-terms-title">Überschrift Zahlungsbedingungen</label><input type="text" id="st-pf-terms-title"></div>
+        <div class="field full"><label for="st-pf-terms">Zahlungsbedingungen</label><textarea id="st-pf-terms" style="min-height:110px;"></textarea></div>
+      </div>
+
       <div class="section-title">Rechnungsnummer</div>
       <div class="form-grid">
         <div class="field"><label for="st-start-no">Nächste Rechnungsnummer</label><input type="number" id="st-start-no" min="1"><div class="note">Zählt automatisch hoch. Gibt es bereits höhere Nummern, wird die nächste freie verwendet.</div></div>
@@ -636,7 +860,24 @@
       warrantyTitle:'Nur bei Fahrzeugverkauf',
       warranty:'Es handelt sich um den Verkauf eines gebrauchten Kraftfahrzeugs. Die gesetzliche Sachmängelhaftung wird gemäß § 476 Abs. 2 BGB auf ein Jahr ab Übergabe des Fahrzeugs beschränkt. Weitergehende Vereinbarungen (z. B. Zustand, Unfallfreiheit, Zubehör) entnehmen Sie bitte dem separaten Kaufvertrag.'
     },
-    startNo: 302
+    startNo: 302,
+    proforma:{
+      wordmark:'MG Autozentrum',
+      signerRole:'Geschäftsführer, M G Autozentrum',
+      prefix:'PF-',
+      startNo:1001,
+      vat:19,
+      country:'Deutschland',
+      legal:{court:'', hrno:'', vatid:''},
+      texts:{
+        subtitle:'Proformarechnung – kein umsatzsteuerlicher Beleg, dient der Zahlungsanforderung. Die Rechnung folgt bei Übergabe.',
+        salutation:'Sehr geehrte Damen und Herren,',
+        intro:'vielen Dank für Ihren Auftrag. Wir berechnen Ihnen folgendes Fahrzeug:',
+        termsTitle:'Zahlungsbedingungen',
+        terms:'100 % Vorkasse vor Übergabe des Fahrzeugs und der Fahrzeugpapiere, ohne Abzug.\nZahlung ausschließlich per Überweisung vom Geschäftskonto des Käufers; keine Bar- oder Drittzahlungen.\nÜbergabe erst nach vollständigem Zahlungseingang und Abschluss des schriftlichen Kaufvertrags.\nDas Fahrzeug bleibt bis zur vollständigen Zahlung Eigentum von M G Autozentrum.',
+        closing:'Mit freundlichen Grüßen'
+      }
+    }
   };
 
   /* ---------- Helpers ---------- */
@@ -673,6 +914,13 @@
     catch(e){ alert('Speichern fehlgeschlagen: ' + e.message + '\n\nMöglicherweise ist der Speicher voll (z. B. durch ein sehr großes Logo).'); return false; }
   }
   function logoSrc(){ return settings.logo === LOGO_DEFAULT_KEY ? DEFAULT_LOGO : (settings.logo || ''); }
+  function round2(n){ n = parseFloat(n); return isFinite(n) ? Math.round((n + Number.EPSILON) * 100) / 100 : 0; }
+  function eur(n){ return round2(n).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' EUR'; }
+  function isPf(d){ var o = d || cur; return !!(o && o.doctype === 'proforma'); }
+  function activePageEl(){ return isPf() ? $('page-pf') : $('page'); }
+  function docWord(d){ return isPf(d) ? 'Proformarechnung' : 'Rechnung'; }
+  function vatRate(inv){ return isPf(inv) ? (parseFloat(inv.vat) || 0) : 0; }
+  function grossTotal(inv){ var net = round2(invTotal(inv)); return net + round2(net * vatRate(inv) / 100); }
 
   /* ---------- Speicher: zentral (Supabase) oder lokal im Browser ---------- */
   var SUPABASE_URL = 'https://hfwcbozaokzdxjvdmhop.supabase.co';
@@ -752,16 +1000,28 @@
     return s;
   }
   function migrateInvoices(list){
-    list.forEach(function(inv){ if(inv && inv.texts && 'hint' in inv.texts) delete inv.texts.hint; });
+    list.forEach(function(inv){
+      if(!inv) return;
+      if(inv.texts && 'hint' in inv.texts) delete inv.texts.hint;
+      inv.doctype = inv.doctype === 'proforma' ? 'proforma' : 'rechnung';
+    });
     return list.filter(function(inv){ return inv && inv.id; });
   }
 
   function findInvoice(id){ for(var i=0;i<invoices.length;i++){ if(invoices[i].id === id) return i; } return -1; }
-  function nextInvNo(){
+  function numPart(no){ var m = String(no == null ? '' : no).match(/(\d+)\s*$/); return m ? parseInt(m[1],10) : NaN; }
+  function nextNoFor(type){
+    if(type === 'proforma'){
+      var p = settings.proforma || {};
+      var maxP = (parseInt(p.startNo,10) || 1) - 1;
+      invoices.forEach(function(inv){ if(inv.doctype === 'proforma'){ var n = numPart(inv.invno); if(isFinite(n) && n > maxP) maxP = n; } });
+      return (p.prefix || '') + (maxP + 1);
+    }
     var max = (parseInt(settings.startNo,10) || 1) - 1;
-    invoices.forEach(function(inv){ var n = parseInt(inv.invno,10); if(isFinite(n) && n > max) max = n; });
+    invoices.forEach(function(inv){ if(inv.doctype !== 'proforma'){ var n = parseInt(inv.invno,10); if(isFinite(n) && n > max) max = n; } });
     return String(max + 1);
   }
+  function nextInvNo(){ return nextNoFor('rechnung'); }
   function invTotal(inv){ return (inv.items||[]).reduce(function(s,r){ return s + (parseFloat(r.price)||0)*(parseFloat(r.qty)||0); },0); }
   function hasContent(inv){
     if(!inv) return false;
@@ -769,14 +1029,29 @@
     if((inv.vmodel||'').trim() || (inv.vplate||'').trim() || (inv.vfin||'').trim()) return true;
     return (inv.items||[]).some(function(r){ return (r.desc||'').trim() || (parseFloat(r.price)||0) > 0; });
   }
-  function newInvoice(){
-    return {
-      id: uid(), invno: nextInvNo(), invdate: todayStr(), servicedate: todayStr(),
-      kname:'', kstreet:'', kcity:'', verkauf:false, vmodel:'', vplate:'', vfin:'', vez:'', vkm:'',
+  function newInvoice(type){
+    type = type === 'proforma' ? 'proforma' : 'rechnung';
+    var d = {
+      id: uid(), doctype: type, invno: nextNoFor(type), invdate: todayStr(), servicedate: todayStr(),
+      kname:'', kstreet:'', kcity:'', kcountry: type === 'proforma' ? (settings.proforma.country || '') : '',
+      verkauf:false, vmodel:'', vplate:'', vfin:'', vez:'', vkm:'',
       items:[{desc:'',price:null,qty:1}],
       texts: clone(settings.texts),
       createdAt: Date.now(), updatedAt: Date.now()
     };
+    return type === 'proforma' ? ensurePf(d) : d;
+  }
+  // Fehlende Proforma-Felder mit den Standardwerten auffüllen
+  function ensurePf(d){
+    if(!d || d.doctype !== 'proforma') return d;
+    var p = settings.proforma || {};
+    d.pf = merge(p.texts, d.pf || {});
+    if(d.vat === undefined || d.vat === null || d.vat === '') d.vat = p.vat;
+    if(d.contact === undefined || d.contact === '') d.contact = settings.gf || '';
+    if(d.phone === undefined || d.phone === '') d.phone = (settings.company && settings.company.tel) || '';
+    if(!d.kcountry) d.kcountry = p.country || '';
+    if(!d.purpose) d.purpose = d.invno || '';
+    return d;
   }
   function setStatus(text, cls){
     var el = $('save-status'); el.textContent = text || ''; el.className = 'status' + (cls ? ' ' + cls : '');
@@ -830,11 +1105,80 @@
       (b.iban ? '<br>IBAN: ' + esc(b.iban) : '') +
       (b.bic ? '<br>BIC: ' + esc(b.bic) + (b.hint ? ' <span class="bic-warn">' + esc(b.hint) + '</span>' : '') : '');
     $('f-tax').innerHTML = (settings.tax.label ? '<b>' + esc(settings.tax.label) + '</b>' : '') + (settings.tax.no ? '<br>' + esc(settings.tax.no) : '');
+
+    // Proformarechnung
+    var p = settings.proforma || {};
+    var L = p.legal || {};
+    function lines(arr){ return arr.filter(function(x){ return x && String(x).trim(); }).map(esc).join('<br>'); }
+    $('pf-wordmark').textContent = p.wordmark || c.name || '';
+    $('pf-sender').textContent = [c.name, c.street, c.city].filter(Boolean).join(' · ');
+    $('pf-bank').textContent = [b.name, b.iban ? 'IBAN ' + b.iban : '', b.bic ? 'BIC ' + b.bic : '', c.name].filter(Boolean).join(' · ');
+    $('pf-signer').textContent = [settings.gf, p.signerRole].filter(Boolean).join('\n');
+    $('pf-f1').innerHTML = lines([c.name, c.street, c.city, p.country]);
+    $('pf-f2').innerHTML = lines([c.tel ? 'Tel. ' + c.tel : '', c.email ? 'E-Mail ' + c.email : '', c.web ? 'Web ' + c.web : '']);
+    $('pf-f3').innerHTML = lines([L.court, L.hrno ? 'HR-Nr. ' + L.hrno : '', L.vatid ? 'USt-IdNr. ' + L.vatid : '',
+      settings.tax.no ? (settings.tax.label || 'Steuer-Nr.') + ' ' + settings.tax.no : '', settings.gf ? 'GF ' + settings.gf : '']);
+    $('pf-f4').innerHTML = lines([b.name, b.iban ? 'IBAN ' + b.iban : '', b.bic ? 'BIC ' + b.bic : '']);
   }
 
   /* ---------- Positionen ---------- */
   var itemsBody = $('items-body');
+  var pfItemsBody = $('pf-items-body');
+  function activeItemsBody(){ return isPf() ? pfItemsBody : itemsBody; }
+
+  function renderPfItems(){
+    pfItemsBody.innerHTML = '';
+    items.forEach(function(row,i){
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td class="pos" data-label="Pos.">'+(i+1)+'.</td>'+
+        '<td class="desc" data-label="Beschreibung"><input type="text" data-k="desc" placeholder="z. B. PORSCHE 911 Turbo S" autocomplete="off">'+
+          '<div class="pf-details" data-k="details" contenteditable="true" data-placeholder="Zusatzzeilen, z. B. Fahrgestell-Nr. (FIN) …"></div></td>'+
+        '<td class="qty" data-label="Menge"><input type="text" inputmode="decimal" data-k="qty"><span class="unit"> Stk</span></td>'+
+        '<td class="price" data-label="Einzelpreis"><input type="text" inputmode="decimal" data-k="price" placeholder="0,00"><span class="unit"> EUR</span></td>'+
+        '<td class="sum" data-label="Gesamt"></td>'+
+        '<td class="del no-print"><button type="button" class="icon-btn" title="Position entfernen">×</button></td>';
+      var descInput = tr.querySelector('[data-k="desc"]');
+      var detailsEl = tr.querySelector('[data-k="details"]');
+      var priceInput = tr.querySelector('[data-k="price"]');
+      var qtyInput = tr.querySelector('[data-k="qty"]');
+      var sumCell = tr.querySelector('.sum');
+      descInput.value = row.desc || '';
+      detailsEl.textContent = row.details || '';
+      priceInput.value = (row.price !== undefined && row.price !== null && row.price !== '') ? fmtNum(row.price) : '';
+      qtyInput.value = fmtNum((row.qty !== undefined && row.qty !== null) ? row.qty : 1);
+      function reformat(el){ if(el.value.trim() !== '' && isFinite(parseNum(el.value))) el.value = fmtNum(parseNum(el.value)); }
+      priceInput.addEventListener('blur', function(){ reformat(priceInput); });
+      qtyInput.addEventListener('blur', function(){ reformat(qtyInput); });
+      function sync(){
+        row.desc = descInput.value;
+        row.details = detailsEl.innerText.replace(/\n$/,'');
+        row.price = priceInput.value.trim() === '' ? null : (parseNum(priceInput.value) || 0);
+        row.qty = parseNum(qtyInput.value) || 0;
+        sumCell.textContent = eur((row.price||0) * row.qty);
+        updateTotal();
+      }
+      function onInput(){ sync(); scheduleSave(); }
+      descInput.addEventListener('input', onInput);
+      detailsEl.addEventListener('input', onInput);
+      priceInput.addEventListener('input', onInput);
+      qtyInput.addEventListener('input', onInput);
+      detailsEl.addEventListener('paste', pastePlain);
+      descInput.addEventListener('keydown', function(e){
+        if(e.key === 'Enter'){ e.preventDefault(); if(i === items.length-1){ addRow(); } }
+      });
+      tr.querySelector('.del button').addEventListener('click', function(){
+        items = items.filter(function(r){ return r.id !== row.id; });
+        if(!items.length) items.push({id:++rowSeq, desc:'', price:null, qty:1});
+        renderItems(); updateTotal(); scheduleSave();
+      });
+      sync();
+      pfItemsBody.appendChild(tr);
+    });
+  }
+
   function renderItems(){
+    if(isPf()) return renderPfItems();
     itemsBody.innerHTML = '';
     items.forEach(function(row,i){
       var tr = document.createElement('tr');
@@ -880,17 +1224,31 @@
   }
   function addRow(data){
     rowSeq++;
-    items.push(Object.assign({id:rowSeq, desc:'', price:null, qty:1}, data||{}));
+    items.push(Object.assign({id:rowSeq, desc:'', price:null, qty:1, details:''}, data||{}));
     renderItems();
-    var inputs = itemsBody.querySelectorAll('[data-k="desc"]');
+    var inputs = activeItemsBody().querySelectorAll('[data-k="desc"]');
     if(!rendering && inputs.length) inputs[inputs.length-1].focus();
   }
   function updateTotal(){
     var sum = items.reduce(function(s,r){ return s + (r.price||0)*(r.qty||0); },0);
     $('total-out').textContent = fmt(sum);
+    var rate = (cur && isPf()) ? (parseFloat($('pf-vat').value) || 0) : 0;
+    var net = round2(sum);
+    var vatAmt = round2(net * rate / 100);
+    $('pf-net').textContent = eur(net);
+    $('pf-vat-label').textContent = String(rate).replace('.', ',');
+    $('pf-vat-amount').textContent = eur(vatAmt);
+    $('pf-gross').textContent = eur(net + vatAmt);
+    $('pf-vat-row').hidden = !(rate > 0);
+    $('pf-total-label').textContent = rate > 0 ? 'Gesamtbetrag brutto' : 'Gesamtbetrag';
+    $('pf-pay-head').textContent = 'Bitte überweisen Sie ' + eur(net + vatAmt) + ' mit dem Verwendungszweck:';
+    var kleinunternehmer = /§\s*19/.test((settings.texts && settings.texts.notes) || '');
+    $('pf-warn').hidden = !(rate > 0 && kleinunternehmer && isPf());
     return sum;
   }
   $('btn-add-row').addEventListener('click', function(){ addRow(); scheduleSave(); });
+  $('pf-add-row').addEventListener('click', function(){ addRow(); scheduleSave(); });
+  $('pf-vat').addEventListener('change', function(){ updateTotal(); scheduleSave(); });
 
   /* ---------- Fahrzeugverkauf ---------- */
   var verkaufToggle = $('verkauf-toggle');
@@ -903,6 +1261,7 @@
   /* ---------- Formular <-> Objekt ---------- */
   function collect(){
     if(!cur) return null;
+    if(isPf()) return collectPf();
     cur.kname = $('k-name').value;
     cur.kstreet = $('k-street').value;
     cur.kcity = $('k-city').value;
@@ -915,7 +1274,7 @@
     cur.vfin = $('v-fin').value;
     cur.vez = $('v-ez').value;
     cur.vkm = $('v-km').value;
-    cur.items = items.map(function(r){ return {desc:r.desc, price:r.price, qty:r.qty}; });
+    cur.items = items.map(function(r){ return {desc:r.desc, price:r.price, qty:r.qty, details:r.details||''}; });
     cur.texts = {
       title: $('inv-title').value,
       thanks: $('t-thanks').innerText.replace(/\n$/,''),
@@ -926,8 +1285,95 @@
     cur.total = invTotal(cur);
     return cur;
   }
+
+  function collectPf(){
+    cur.kname = $('pf-k-name').value;
+    cur.kstreet = $('pf-k-street').value;
+    cur.kcity = $('pf-k-city').value;
+    cur.kcountry = $('pf-k-country').value;
+    cur.invno = $('pf-no').value.trim();
+    cur.invdate = $('pf-date').value;
+    cur.contact = $('pf-contact').value;
+    cur.phone = $('pf-phone').value;
+    cur.vat = parseFloat($('pf-vat').value) || 0;
+    cur.purpose = $('pf-purpose').value;
+    cur.pf = {
+      subtitle: $('pf-subtitle').innerText.replace(/\n$/,''),
+      salutation: $('pf-salutation').innerText.replace(/\n$/,''),
+      intro: $('pf-intro').innerText.replace(/\n$/,''),
+      termsTitle: $('pf-terms-title').innerText.replace(/\n$/,''),
+      terms: $('pf-terms').innerText.replace(/\n$/,''),
+      closing: $('pf-closing').innerText.replace(/\n$/,'')
+    };
+    cur.items = items.map(function(r){ return {desc:r.desc, price:r.price, qty:r.qty, details:r.details||''}; });
+    cur.total = invTotal(cur);
+    return cur;
+  }
+
+  /* ---------- Dokumentart umschalten ---------- */
+  function applyDoctype(){
+    var pf = isPf();
+    $('page').hidden = pf;
+    $('page-pf').hidden = !pf;
+    document.querySelectorAll('.doctype-bar [data-doctype]').forEach(function(b){
+      b.classList.toggle('active', (b.getAttribute('data-doctype') === 'proforma') === pf);
+    });
+    $('btn-duplicate').textContent = pf ? 'Proformarechnung duplizieren' : 'Rechnung duplizieren';
+    $('btn-delete').textContent = pf ? 'Diese Proformarechnung löschen' : 'Diese Rechnung löschen';
+    $('btn-new').textContent = pf ? 'Neue Proformarechnung' : 'Neue Rechnung';
+  }
+  function setDoctype(type){
+    if(!cur || cur.doctype === type) return;
+    flushSave(); collect();
+    var fresh = findInvoice(cur.id) < 0 && !hasContent(cur);
+    var newNo = nextNoFor(type);
+    if(!fresh && !confirm('Dieses Dokument in eine ' + (type === 'proforma' ? 'Proformarechnung' : 'Rechnung') +
+        ' umwandeln?\n\nEs bekommt die neue Nummer ' + newNo + ', damit die Nummernkreise getrennt bleiben.')) return;
+    cur.doctype = type;
+    cur.invno = newNo;
+    if(type === 'proforma'){ cur.purpose = ''; ensurePf(cur); }
+    applyDoctype(); render();
+    if(!fresh) scheduleSave();
+    setStatus(docWord(cur) + ' Nr. ' + cur.invno, '');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  document.querySelectorAll('.doctype-bar [data-doctype]').forEach(function(b){
+    b.addEventListener('click', function(){ setDoctype(b.getAttribute('data-doctype')); });
+  });
+
+  function renderPf(){
+    var d = ensurePf(cur);
+    var t = d.pf;
+    $('pf-k-name').value = d.kname || '';
+    $('pf-k-street').value = d.kstreet || '';
+    $('pf-k-city').value = d.kcity || '';
+    $('pf-k-country').value = d.kcountry || '';
+    $('pf-no').value = d.invno || '';
+    $('pf-date').value = d.invdate || '';
+    $('pf-contact').value = d.contact || '';
+    $('pf-phone').value = d.phone || '';
+    $('pf-vat').value = String(parseFloat(d.vat) || 0);
+    $('pf-purpose').value = d.purpose || d.invno || '';
+    $('pf-subtitle').textContent = t.subtitle || '';
+    $('pf-salutation').textContent = t.salutation || '';
+    $('pf-intro').textContent = t.intro || '';
+    $('pf-terms-title').textContent = t.termsTitle || '';
+    $('pf-terms').textContent = t.terms || '';
+    $('pf-closing').textContent = t.closing || '';
+    $('pf-title-no').textContent = d.invno || '–';
+    items = []; rowSeq = 0;
+    (d.items && d.items.length ? d.items : [{desc:'',price:null,qty:1}]).forEach(function(it){ addRow(it); });
+  }
+
   function render(){
     rendering = true;
+    applyDoctype();
+    if(isPf()){
+      renderPf();
+      updateTotal(); checkDuplicateNo(); updatePageInfo();
+      rendering = false;
+      return;
+    }
     var d = cur;
     var t = merge(settings.texts, d.texts || {});
     $('k-name').value = d.kname || '';
@@ -959,7 +1405,7 @@
     if(!cur) return;
     var idx = findInvoice(cur.id);
     var el = $('page-info');
-    if(idx < 0){ el.textContent = 'Neue Rechnung – wird automatisch gespeichert, sobald du etwas eingibst.'; }
+    if(idx < 0){ el.textContent = 'Neue ' + docWord() + ' – wird automatisch gespeichert, sobald du etwas eingibst.'; }
     else {
       var d = new Date(invoices[idx].updatedAt || 0);
       el.textContent = 'Gespeichert · zuletzt geändert am ' + pad(d.getDate())+'.'+pad(d.getMonth()+1)+'.'+d.getFullYear()+' um '+pad(d.getHours())+':'+pad(d.getMinutes());
@@ -968,9 +1414,13 @@
   }
   function checkDuplicateNo(){
     if(!cur) return;
-    var no = $('inv-no').value.trim();
-    var dup = no && invoices.some(function(inv){ return inv.id !== cur.id && String(inv.invno).trim() === no; });
-    $('dup-warn').hidden = !dup;
+    var pf = isPf();
+    var no = (pf ? $('pf-no').value : $('inv-no').value).trim();
+    var dup = !!no && invoices.some(function(inv){
+      return inv.id !== cur.id && (inv.doctype === 'proforma') === pf && String(inv.invno).trim() === no;
+    });
+    $('dup-warn').hidden = !(dup && !pf);
+    $('pf-dup-warn').hidden = !(dup && pf);
   }
 
   /* ---------- Speichern ---------- */
@@ -1005,21 +1455,23 @@
   }
   function flushSave(){ if(saveTimer){ save(false); } }
 
-  document.querySelectorAll('#page input, #page [contenteditable]').forEach(function(el){
+  document.querySelectorAll('#page input, #page [contenteditable], #page-pf input, #page-pf [contenteditable]').forEach(function(el){
     el.addEventListener('input', function(){
-      if(el.id === 'inv-no') checkDuplicateNo();
+      if(el.id === 'inv-no' || el.id === 'pf-no') checkDuplicateNo();
+      if(el.id === 'pf-no'){ $('pf-title-no').textContent = el.value || '–'; }
       scheduleSave();
     });
   });
-  ['t-thanks','t-warranty-title'].forEach(function(id){
+  ['t-thanks','t-warranty-title','pf-salutation','pf-terms-title','pf-closing'].forEach(function(id){
     $(id).addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); } });
   });
-  document.querySelectorAll('#page [contenteditable]').forEach(function(el){
-    el.addEventListener('paste', function(e){
-      e.preventDefault();
-      var text = (e.clipboardData || window.clipboardData).getData('text/plain');
-      document.execCommand('insertText', false, text);
-    });
+  function pastePlain(e){
+    e.preventDefault();
+    var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    document.execCommand('insertText', false, text);
+  }
+  document.querySelectorAll('#page [contenteditable], #page-pf [contenteditable]').forEach(function(el){
+    el.addEventListener('paste', pastePlain);
   });
 
   /* ---------- Rechnung öffnen / neu / löschen / duplizieren ---------- */
@@ -1034,23 +1486,24 @@
     if(idx < 0) return;
     cur = clone(invoices[idx]);
     render();
-    setStatus('Rechnung Nr. ' + (cur.invno || '–') + ' geöffnet', '');
+    setStatus(docWord() + ' Nr. ' + (cur.invno || '–') + ' geöffnet', '');
     closeLists();
     window.scrollTo({top:0, behavior:'smooth'});
   }
   function createNew(){
     flushSave();
     collect();
+    var type = cur ? cur.doctype : 'rechnung';
     if(cur && hasContent(cur)){
       var saved = findInvoice(cur.id) >= 0;
       var msg = saved
-        ? 'Die aktuelle Rechnung Nr. ' + (cur.invno||'–') + ' ist gespeichert und bleibt unter „Alle Rechnungen“ erreichbar.\n\nNeue Rechnung anlegen?'
-        : 'Die aktuelle Rechnung konnte nicht gespeichert werden.\n\nTrotzdem neue Rechnung anlegen? (Eingaben gehen verloren)';
+        ? 'Das aktuelle Dokument Nr. ' + (cur.invno||'–') + ' ist gespeichert und bleibt unter „Alle Rechnungen“ erreichbar.\n\nNeue ' + docWord() + ' anlegen?'
+        : 'Das aktuelle Dokument konnte nicht gespeichert werden.\n\nTrotzdem neu anlegen? (Eingaben gehen verloren)';
       if(!confirm(msg)) return;
     }
-    cur = newInvoice();
+    cur = newInvoice(type);
     render();
-    setStatus('Neue Rechnung Nr. ' + cur.invno, '');
+    setStatus('Neue ' + docWord() + ' Nr. ' + cur.invno, '');
     closeLists();
     window.scrollTo({top:0, behavior:'smooth'});
   }
@@ -1058,15 +1511,15 @@
     var idx = findInvoice(id);
     if(idx < 0) return;
     var inv = invoices[idx];
-    var label = 'Nr. ' + (inv.invno||'–') + (inv.kname ? ' (' + inv.kname + ')' : '');
-    if(!confirm('Rechnung ' + label + ' wirklich löschen?\n\nDas kann nicht rückgängig gemacht werden.')) return;
+    var label = docWord(inv) + ' Nr. ' + (inv.invno||'–') + (inv.kname ? ' (' + inv.kname + ')' : '');
+    if(!confirm(label + ' wirklich löschen?\n\nDas kann nicht rückgängig gemacht werden.')) return;
     invoices.splice(idx, 1);
     enqueue(function(){ return store.deleteInvoice(id); }).catch(function(e){ console.error(e); alert('Löschen fehlgeschlagen. Bitte erneut versuchen.'); });
     if(cur && cur.id === id){
       clearTimeout(saveTimer); saveTimer = null;
       cur = newInvoice(); render();
     }
-    setStatus('Rechnung ' + label + ' gelöscht', 'warn');
+    setStatus(label + ' gelöscht', 'warn');
     refreshArchive(); refreshAll(); updatePageInfo(); checkDuplicateNo();
   }
   function duplicateInvoice(id){
@@ -1076,14 +1529,15 @@
     if(!src) return;
     var copy = clone(src);
     copy.id = uid();
-    copy.invno = nextInvNo();
+    copy.invno = nextNoFor(copy.doctype);
+    if(copy.doctype === 'proforma') copy.purpose = copy.invno;
     copy.invdate = todayStr();
     copy.servicedate = todayStr();
     copy.createdAt = Date.now(); copy.updatedAt = Date.now();
     cur = copy;
     render();
     save(true);
-    setStatus('Kopie angelegt als Nr. ' + cur.invno, 'ok');
+    setStatus('Kopie angelegt als ' + docWord() + ' Nr. ' + cur.invno, 'ok');
     closeLists();
     window.scrollTo({top:0, behavior:'smooth'});
   }
@@ -1096,7 +1550,7 @@
   /* ---------- PDF ---------- */
   function pdfFileName(){
     var k = (cur.kname||'').trim().replace(/[^\wäöüÄÖÜß-]+/g,'_').replace(/^_+|_+$/g,'');
-    return 'Rechnung_' + (cur.invno||'ohne_Nr') + (k ? '_' + k : '') + '.pdf';
+    return (isPf() ? 'Proforma_' : 'Rechnung_') + (cur.invno||'ohne_Nr') + (k ? '_' + k : '') + '.pdf';
   }
   var pdfRunning = false;
   $('btn-pdf').addEventListener('click', function(){
@@ -1125,7 +1579,7 @@
     };
     function cleanup(){ document.body.classList.remove('pdf-mode'); applyMode(); if(busy.parentNode) busy.remove(); pdfRunning = false; }
     setTimeout(function(){
-      var worker = html2pdf().set(opt).from($('page'));
+      var worker = html2pdf().set(opt).from(activePageEl());
       var p;
       if(store.downloads){
         // Gehostete App: Datei über die Plattform anbieten (funktioniert auch auf dem Handy)
@@ -1153,7 +1607,14 @@
       return (b.updatedAt||0) - (a.updatedAt||0);
     });
   }
-  function vehicleStr(inv){ return [inv.vmodel, inv.vplate].filter(function(s){ return s && s.trim(); }).join(' · '); }
+  function vehicleStr(inv){
+    var v = [inv.vmodel, inv.vplate].filter(function(s){ return s && s.trim(); }).join(' · ');
+    if(v) return v;
+    if(inv.doctype === 'proforma'){ var first = (inv.items||[])[0]; return first ? (first.desc || '') : ''; }
+    return '';
+  }
+  function badge(inv){ return inv.doctype === 'proforma' ? '<span class="pf-badge">PF</span>' : ''; }
+  function listTotal(inv){ return inv.doctype === 'proforma' ? grossTotal(inv) : invTotal(inv); }
 
   function refreshArchive(){
     var body = $('archive-body');
@@ -1167,7 +1628,7 @@
     list.slice(0,10).forEach(function(inv){
       var tr = document.createElement('tr');
       tr.className = 'row' + (cur && cur.id === inv.id ? ' current' : '');
-      tr.innerHTML = '<td><b>'+esc(inv.invno)+'</b></td><td>'+esc(inv.invdate)+'</td><td>'+esc(inv.kname)+'</td><td>'+esc(vehicleStr(inv))+'</td><td style="text-align:right">'+fmt(invTotal(inv))+'</td>'+
+      tr.innerHTML = '<td>'+badge(inv)+'<b>'+esc(inv.invno)+'</b></td><td>'+esc(inv.invdate)+'</td><td>'+esc(inv.kname)+'</td><td>'+esc(vehicleStr(inv))+'</td><td style="text-align:right">'+fmt(listTotal(inv))+'</td>'+
         '<td style="text-align:right"><button class="icon-btn" title="Löschen" type="button">×</button></td>';
       tr.addEventListener('click', function(){ openInvoice(inv.id); });
       tr.querySelector('.icon-btn').addEventListener('click', function(e){ e.stopPropagation(); deleteInvoice(inv.id); });
@@ -1189,7 +1650,8 @@
     $('all-count').textContent = '(' + list.length + ')';
     if(q){
       list = list.filter(function(inv){
-        var hay = [inv.invno, inv.invdate, inv.servicedate, inv.kname, inv.kstreet, inv.kcity, inv.vmodel, inv.vplate, inv.vfin].join(' ').toLowerCase();
+        var hay = [inv.invno, inv.invdate, inv.servicedate, inv.kname, inv.kstreet, inv.kcity, inv.vmodel, inv.vplate, inv.vfin, docWord(inv),
+          (inv.items||[]).map(function(it){ return it.desc; }).join(' ')].join(' ').toLowerCase();
         return hay.indexOf(q) >= 0;
       });
     }
@@ -1202,11 +1664,11 @@
       var tr = document.createElement('tr');
       if(cur && cur.id === inv.id) tr.className = 'current';
       tr.innerHTML =
-        '<td class="num">'+esc(inv.invno)+'</td>'+
+        '<td class="num">'+badge(inv)+esc(inv.invno)+'</td>'+
         '<td>'+esc(inv.invdate)+'</td>'+
         '<td>'+esc(inv.kname)+(inv.kcity ? '<span class="sub">'+esc(inv.kcity)+'</span>' : '')+'</td>'+
         '<td>'+esc(vehicleStr(inv))+'</td>'+
-        '<td class="num">'+fmt(invTotal(inv))+'</td>'+
+        '<td class="num">'+fmt(listTotal(inv))+'</td>'+
         '<td class="actions">'+
           '<button class="btn small primary" data-act="open" type="button">Öffnen</button>'+
           '<button class="btn small" data-act="dup" title="Kopie mit neuer Nummer anlegen" type="button">Duplizieren</button>'+
@@ -1259,7 +1721,16 @@
     var t = settings.texts;
     $('st-title').value = t.title||''; $('st-thanks').value = t.thanks||''; $('st-notes').value = t.notes||'';
     $('st-warranty-title').value = t.warrantyTitle||''; $('st-warranty').value = t.warranty||'';
-    $('st-start-no').value = nextInvNo();
+    $('st-start-no').value = nextNoFor('rechnung');
+    var p = settings.proforma, L = p.legal || {}, pt = p.texts || {};
+    $('st-pf-wordmark').value = p.wordmark||''; $('st-pf-signer').value = p.signerRole||'';
+    $('st-pf-prefix').value = p.prefix||''; $('st-pf-start-no').value = numPart(nextNoFor('proforma')) || p.startNo;
+    $('st-pf-vat').value = (p.vat === undefined ? 19 : p.vat);
+    $('st-pf-country').value = p.country||'';
+    $('st-pf-court').value = L.court||''; $('st-pf-hrno').value = L.hrno||''; $('st-pf-vatid').value = L.vatid||'';
+    $('st-pf-subtitle').value = pt.subtitle||''; $('st-pf-salutation').value = pt.salutation||'';
+    $('st-pf-intro').value = pt.intro||''; $('st-pf-terms-title').value = pt.termsTitle||'';
+    $('st-pf-terms').value = pt.terms||''; $('st-pf-closing').value = pt.closing||'';
     pendingLogo = settings.logo;
     $('st-logo-file').value = '';
     renderLogoPreview(pendingLogo);
@@ -1292,6 +1763,14 @@
     settings.texts = {title:$('st-title').value, thanks:$('st-thanks').value, notes:$('st-notes').value,
       warrantyTitle:$('st-warranty-title').value, warranty:$('st-warranty').value};
     settings.startNo = parseInt($('st-start-no').value,10) || settings.startNo;
+    settings.proforma = {
+      wordmark:$('st-pf-wordmark').value.trim(), signerRole:$('st-pf-signer').value.trim(),
+      prefix:$('st-pf-prefix').value.trim(), startNo:parseInt($('st-pf-start-no').value,10) || settings.proforma.startNo,
+      vat:parseFloat($('st-pf-vat').value) || 0, country:$('st-pf-country').value.trim(),
+      legal:{court:$('st-pf-court').value.trim(), hrno:$('st-pf-hrno').value.trim(), vatid:$('st-pf-vatid').value.trim()},
+      texts:{subtitle:$('st-pf-subtitle').value, salutation:$('st-pf-salutation').value, intro:$('st-pf-intro').value,
+        termsTitle:$('st-pf-terms-title').value, terms:$('st-pf-terms').value, closing:$('st-pf-closing').value}
+    };
     settings.logo = pendingLogo || '';
     renderSettings();
     enqueue(function(){ return store.saveSettings(settings); }).then(function(){ setStatus('Einstellungen gespeichert', 'ok'); },
@@ -1304,12 +1783,13 @@
         if((cur.texts[k]||'') === (oldTexts[k]||'') && oldTexts[k] !== settings.texts[k]){ cur.texts[k] = settings.texts[k]; changed = true; }
       });
       if(changed){ render(); scheduleSave(); }
-      if(findInvoice(cur.id) < 0 && !hasContent(cur)){ cur.invno = nextInvNo(); $('inv-no').value = cur.invno; }
+      if(findInvoice(cur.id) < 0 && !hasContent(cur)){ cur = newInvoice(cur.doctype); render(); }
+      else if(isPf()){ render(); }
     }
     closeModal('settings-modal');
   });
   $('btn-settings').addEventListener('click', function(){ openModal('settings-modal'); });
-  ['logo-wrap','header-contact','sender-line','footer'].forEach(function(id){
+  ['logo-wrap','header-contact','sender-line','footer','pf-wordmark','pf-sender','pf-foot','pf-bank'].forEach(function(id){
     $(id).addEventListener('click', function(){ openModal('settings-modal'); });
   });
 
@@ -1382,13 +1862,16 @@
     renderSettings();
     if(!hasContent(collect())){ cur = newInvoice(); render(); }
     else { checkDuplicateNo(); updatePageInfo(); }
-    setStatus((store.mode === 'cloud' ? 'Bereit (synchronisiert)' : 'Bereit') + ' – Rechnung Nr. ' + cur.invno, '');
+    setStatus((store.mode === 'cloud' ? 'Bereit (synchronisiert)' : 'Bereit') + ' – ' + docWord() + ' Nr. ' + cur.invno, '');
     store.subscribe(function(list){
       invoices = migrateInvoices(list);
       if($('archive-panel').classList.contains('open')) refreshArchive();
       if(!$('all-modal').hidden) refreshAll();
       checkDuplicateNo(); updatePageInfo();
-      if(cur && findInvoice(cur.id) < 0 && !hasContent(collect())){ cur.invno = nextInvNo(); $('inv-no').value = cur.invno; }
+      if(cur && findInvoice(cur.id) < 0 && !hasContent(collect())){
+        cur.invno = nextNoFor(cur.doctype);
+        if(isPf()){ cur.purpose = cur.invno; render(); } else { $('inv-no').value = cur.invno; }
+      }
     }, function(s){
       settings = migrateSettings(s);
       renderSettings();
