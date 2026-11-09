@@ -105,8 +105,10 @@
     color:var(--gold);margin-bottom:6px;
   }
 
-  .recipient input{display:block;font-size:15px;margin-bottom:3px;width:100%;max-width:320px;}
-  .recipient input.name{font-size:15px;font-weight:700;}
+  .recipient input, .recipient .mline{display:block;font-size:15px;margin-bottom:3px;width:100%;max-width:320px;}
+  .recipient .name{font-size:15px;font-weight:700;}
+  /* mehrzeilige Felder: langer Text bricht um, statt abgeschnitten zu werden */
+  .mline{white-space:pre-wrap;overflow-wrap:anywhere;}
 
   .title-row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:26px;gap:16px;flex-wrap:wrap;}
   .title-row h1{font-family:Georgia,"Times New Roman",serif;font-size:30px;margin:0;letter-spacing:.02em;}
@@ -124,7 +126,8 @@
   .vbox .col{flex:1;min-width:220px;}
   .vfield{font-size:13px;margin-bottom:6px;}
   .vfield b{font-weight:700;margin-right:4px;}
-  .vfield input{width:170px;max-width:100%;font-size:13px;}
+  .vfield input, .vfield .mline{width:170px;max-width:100%;font-size:13px;}
+  .vfield .mline{display:inline-block;vertical-align:top;}
 
   .verkauf-toggle{margin:12px 0 4px;font-size:12.5px;color:var(--gray);display:flex;align-items:center;gap:6px;}
 
@@ -140,7 +143,7 @@
   table.items thead th.center{text-align:center;}
   table.items tbody td{border-bottom:1px solid #e2e2e2;padding:9px 10px;font-size:13.5px;vertical-align:middle;}
   table.items tbody td.pos{text-align:center;color:var(--light-gray);width:34px;}
-  table.items tbody td.desc input{width:100%;min-width:120px;}
+  table.items tbody td.desc input, table.items tbody td.desc .mline{width:100%;min-width:120px;}
   table.items tbody td.price input{width:70px;text-align:right;}
   table.items tbody td.qty input{width:42px;text-align:center;}
   table.items tbody td.total{text-align:right;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums;}
@@ -241,7 +244,7 @@
   .pf-sender{font-size:9.5px;color:#444;margin:34px 0 10px;display:inline-block;}
   .pf-top{display:flex;gap:28px;align-items:flex-start;}
   .pf-recipient{flex:1;min-width:0;}
-  .pf-recipient input{display:block;width:100%;max-width:300px;font-size:14.5px;margin-bottom:2px;}
+  .pf-recipient input, .pf-recipient .mline{display:block;width:100%;max-width:300px;font-size:14.5px;margin-bottom:2px;}
   .pf-meta{flex:0 0 48%;}
   .pf-meta-row{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:2px 0;}
   .pf-meta-row input{text-align:right;width:56%;font-size:13px;}
@@ -260,7 +263,7 @@
   table.pf-items tbody td.price{text-align:right;white-space:nowrap;width:115px;font-variant-numeric:tabular-nums;}
   table.pf-items tbody td.sum{text-align:right;white-space:nowrap;width:115px;font-variant-numeric:tabular-nums;}
   table.pf-items tbody td.del{width:24px;text-align:right;}
-  table.pf-items td.desc input{width:100%;}
+  table.pf-items td.desc input, table.pf-items td.desc .mline{width:100%;}
   table.pf-items td.qty input{width:38px;text-align:right;}
   table.pf-items td.price input{width:72px;text-align:right;}
   .pf-details{margin-top:2px;line-height:1.45;font-size:12.5px;}
@@ -325,8 +328,8 @@
   }
   body.m-edit .page input:hover, body.m-edit .page [contenteditable]:hover{background:#fbfaf8;}
   body.m-edit .page input:focus, body.m-edit .page [contenteditable]:focus{outline:none;border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(150,113,47,.15);}
-  body.m-edit .recipient input{margin-bottom:0;}
-  body.m-edit .recipient input.name{font-weight:600;}
+  body.m-edit .recipient input, body.m-edit .recipient .mline{margin-bottom:0;}
+  body.m-edit .recipient .name{font-weight:600;}
   body.m-edit .title-row{display:block;margin-top:0;}
   body.m-edit .title-row .m-label{margin-top:0;}
   body.m-edit .title-row h1{font:inherit;}
@@ -342,6 +345,7 @@
   body.m-edit .vbox .col .label{margin:8px 0 0;}
   body.m-edit .vbox .col.verkauf-only .label{display:none;}
   body.m-edit .vfield{margin:0;font-size:inherit;}
+  body.m-edit .vfield .mline{width:100%;display:block;}
   body.m-edit .thanks{margin:0;font-style:normal;}
   body.m-edit .items-sec .m-only{margin-top:14px;}
   body.m-edit .items-wrap{overflow:visible;}
@@ -383,7 +387,7 @@
   body.m-edit .pf-meta-row > span{display:block;font-size:11px;font-weight:600;color:var(--gray);letter-spacing:.04em;text-transform:uppercase;margin:10px 0 4px;}
   body.m-edit .pf-meta-row input, body.m-edit .pf-meta-row.head input{text-align:left;width:100%;font-size:16px;font-weight:400;}
   body.m-edit .pf-title{font-size:17px;margin:0 0 6px;}
-  body.m-edit .pf-recipient input{max-width:none;}
+  body.m-edit .pf-recipient input, body.m-edit .pf-recipient .mline{max-width:none;}
   body.m-edit .pf-subtitle, body.m-edit .pf-salutation, body.m-edit .pf-intro, body.m-edit .pf-terms, body.m-edit .pf-closing{margin-top:0;}
   body.m-edit table.pf-items{display:block;margin-top:6px;}
   body.m-edit table.pf-items thead{display:none;}
@@ -422,6 +426,8 @@
   body.pdf-mode .pf-foot, body.pdf-mode .pf-sums, body.pdf-mode .pf-pay, body.pdf-mode .pf-terms{page-break-inside:avoid;break-inside:avoid;}
   body.pdf-mode input, body.pdf-mode [contenteditable]{background:transparent!important;outline:none!important;}
   body.pdf-mode [contenteditable]:empty{display:none;}
+  body.pdf-mode .vfield .mline:empty{display:inline-block;}
+  body.pdf-mode [contenteditable]:empty:before{content:'' !important;}
   body.pdf-mode input::placeholder{color:transparent;}
   body.pdf-mode .editable-block:hover{outline:none;}
   body.pdf-mode .editable-block:hover:after{display:none;}
@@ -436,6 +442,7 @@
     .page{box-shadow:none;max-width:none;margin:0;padding:14mm 16mm;}
     input, [contenteditable]{background:transparent!important;outline:none!important;}
     [contenteditable]:empty{display:none;}
+    [contenteditable]:empty:before{content:'' !important;}
     * {-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     @page{size:A4;margin:0;}
   }
@@ -496,11 +503,11 @@
   <div class="recipient sec">
     <div class="label">Rechnungsempfänger</div>
     <span class="m-label">Kundenname / Firma</span>
-    <input class="name" id="k-name" placeholder="Kundenname / Firma" autocomplete="off">
+    <div class="name mline" id="k-name" contenteditable="true" data-placeholder="Kundenname / Firma"></div>
     <span class="m-label">Straße Hausnummer</span>
-    <input id="k-street" placeholder="Straße Hausnummer" autocomplete="off">
+    <div class="mline" id="k-street" contenteditable="true" data-placeholder="Straße Hausnummer"></div>
     <span class="m-label">PLZ Ort</span>
-    <input id="k-city" placeholder="PLZ Ort" autocomplete="off">
+    <div class="mline" id="k-city" contenteditable="true" data-placeholder="PLZ Ort"></div>
   </div>
 
   <div class="title-row sec">
@@ -525,12 +532,12 @@
   <div class="vbox">
     <div class="col">
       <div class="label">Fahrzeugdaten</div>
-      <div class="vfield"><b>Marke / Modell:</b><input id="v-model" placeholder="z. B. Mercedes Citan" autocomplete="off"></div>
-      <div class="vfield"><b>Kennzeichen:</b><input id="v-plate" placeholder="z. B. A-JK-61" autocomplete="off"></div>
+      <div class="vfield"><b>Marke / Modell:</b><div class="mline" id="v-model" contenteditable="true" data-placeholder="z. B. Mercedes Citan"></div></div>
+      <div class="vfield"><b>Kennzeichen:</b><div class="mline" id="v-plate" contenteditable="true" data-placeholder="z. B. A-JK-61"></div></div>
     </div>
     <div class="col verkauf-only" style="display:none;">
       <div class="label">&nbsp;</div>
-      <div class="vfield"><b>FIN:</b><input id="v-fin" placeholder="Fahrgestellnr." autocomplete="off"></div>
+      <div class="vfield"><b>FIN:</b><div class="mline" id="v-fin" contenteditable="true" data-placeholder="Fahrgestellnr."></div></div>
       <div class="vfield"><b>Erstzulassung:</b><input id="v-ez" placeholder="TT.MM.JJJJ" autocomplete="off"></div>
       <div class="vfield"><b>KM-Stand:</b><input id="v-km" placeholder="z. B. 84.000" autocomplete="off"></div>
     </div>
@@ -604,11 +611,11 @@
     <div class="pf-recipient sec">
       <div class="label m-only">Empfänger</div>
       <span class="m-label">Firma / Name</span>
-      <input id="pf-k-name" placeholder="Firma / Name" autocomplete="off">
+      <div class="mline" id="pf-k-name" contenteditable="true" data-placeholder="Firma / Name"></div>
       <span class="m-label">Straße Hausnummer</span>
-      <input id="pf-k-street" placeholder="Straße Hausnummer" autocomplete="off">
+      <div class="mline" id="pf-k-street" contenteditable="true" data-placeholder="Straße Hausnummer"></div>
       <span class="m-label">PLZ Ort</span>
-      <input id="pf-k-city" placeholder="PLZ Ort" autocomplete="off">
+      <div class="mline" id="pf-k-city" contenteditable="true" data-placeholder="PLZ Ort"></div>
       <span class="m-label">Land</span>
       <input id="pf-k-country" placeholder="Land" autocomplete="off">
     </div>
@@ -914,6 +921,9 @@
     catch(e){ alert('Speichern fehlgeschlagen: ' + e.message + '\n\nMöglicherweise ist der Speicher voll (z. B. durch ein sehr großes Logo).'); return false; }
   }
   function logoSrc(){ return settings.logo === LOGO_DEFAULT_KEY ? DEFAULT_LOGO : (settings.logo || ''); }
+  // Felder koennen <input> oder mehrzeilig (contenteditable) sein
+  function fval(el){ if(typeof el === 'string') el = $(el); if(!el) return ''; return el.tagName === 'INPUT' ? el.value : el.innerText.replace(/\n$/,''); }
+  function fset(el, v){ if(typeof el === 'string') el = $(el); if(!el) return; if(el.tagName === 'INPUT') el.value = v || ''; else el.textContent = v || ''; }
   function round2(n){ n = parseFloat(n); return isFinite(n) ? Math.round((n + Number.EPSILON) * 100) / 100 : 0; }
   function eur(n){ return round2(n).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' EUR'; }
   function isPf(d){ var o = d || cur; return !!(o && o.doctype === 'proforma'); }
@@ -1121,6 +1131,12 @@
     $('pf-f4').innerHTML = lines([b.name, b.iban ? 'IBAN ' + b.iban : '', b.bic ? 'BIC ' + b.bic : '']);
   }
 
+  function pastePlain(e){
+    e.preventDefault();
+    var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    document.execCommand('insertText', false, text);
+  }
+
   /* ---------- Positionen ---------- */
   var itemsBody = $('items-body');
   var pfItemsBody = $('pf-items-body');
@@ -1132,7 +1148,7 @@
       var tr = document.createElement('tr');
       tr.innerHTML =
         '<td class="pos" data-label="Pos.">'+(i+1)+'.</td>'+
-        '<td class="desc" data-label="Beschreibung"><input type="text" data-k="desc" placeholder="z. B. PORSCHE 911 Turbo S" autocomplete="off">'+
+        '<td class="desc" data-label="Beschreibung"><div class="mline" data-k="desc" contenteditable="true" data-placeholder="z. B. PORSCHE 911 Turbo S"></div>'+
           '<div class="pf-details" data-k="details" contenteditable="true" data-placeholder="Zusatzzeilen, z. B. Fahrgestell-Nr. (FIN) …"></div></td>'+
         '<td class="qty" data-label="Menge"><input type="text" inputmode="decimal" data-k="qty"><span class="unit"> Stk</span></td>'+
         '<td class="price" data-label="Einzelpreis"><input type="text" inputmode="decimal" data-k="price" placeholder="0,00"><span class="unit"> EUR</span></td>'+
@@ -1143,15 +1159,16 @@
       var priceInput = tr.querySelector('[data-k="price"]');
       var qtyInput = tr.querySelector('[data-k="qty"]');
       var sumCell = tr.querySelector('.sum');
-      descInput.value = row.desc || '';
+      descInput.textContent = row.desc || '';
       detailsEl.textContent = row.details || '';
+      descInput.addEventListener('paste', pastePlain);
       priceInput.value = (row.price !== undefined && row.price !== null && row.price !== '') ? fmtNum(row.price) : '';
       qtyInput.value = fmtNum((row.qty !== undefined && row.qty !== null) ? row.qty : 1);
       function reformat(el){ if(el.value.trim() !== '' && isFinite(parseNum(el.value))) el.value = fmtNum(parseNum(el.value)); }
       priceInput.addEventListener('blur', function(){ reformat(priceInput); });
       qtyInput.addEventListener('blur', function(){ reformat(qtyInput); });
       function sync(){
-        row.desc = descInput.value;
+        row.desc = descInput.innerText.replace(/\n$/,'');
         row.details = detailsEl.innerText.replace(/\n$/,'');
         row.price = priceInput.value.trim() === '' ? null : (parseNum(priceInput.value) || 0);
         row.qty = parseNum(qtyInput.value) || 0;
@@ -1164,9 +1181,6 @@
       priceInput.addEventListener('input', onInput);
       qtyInput.addEventListener('input', onInput);
       detailsEl.addEventListener('paste', pastePlain);
-      descInput.addEventListener('keydown', function(e){
-        if(e.key === 'Enter'){ e.preventDefault(); if(i === items.length-1){ addRow(); } }
-      });
       tr.querySelector('.del button').addEventListener('click', function(){
         items = items.filter(function(r){ return r.id !== row.id; });
         if(!items.length) items.push({id:++rowSeq, desc:'', price:null, qty:1});
@@ -1184,7 +1198,7 @@
       var tr = document.createElement('tr');
       tr.innerHTML =
         '<td class="pos">'+(i+1)+'</td>'+
-        '<td class="desc" data-label="Bezeichnung"><input type="text" data-k="desc" placeholder="z. B. Komplettaufbereitung inkl. Keramikversiegelung" autocomplete="off"></td>'+
+        '<td class="desc" data-label="Bezeichnung"><div class="mline" data-k="desc" contenteditable="true" data-placeholder="z. B. Komplettaufbereitung inkl. Keramikversiegelung"></div></td>'+
         '<td class="price" data-label="Einzelpreis (€)"><input type="text" inputmode="decimal" data-k="price" placeholder="0,00" autocomplete="off"></td>'+
         '<td class="qty" data-label="Anzahl"><input type="number" step="1" min="0" inputmode="numeric" data-k="qty"></td>'+
         '<td class="total" data-label="Gesamt"></td>'+
@@ -1193,14 +1207,15 @@
       var priceInput = tr.querySelector('[data-k="price"]');
       var qtyInput = tr.querySelector('[data-k="qty"]');
       var totalCell = tr.querySelector('.total');
-      descInput.value = row.desc || '';
+      descInput.textContent = row.desc || '';
       priceInput.value = (row.price !== undefined && row.price !== null && row.price !== '') ? fmtNum(row.price) : '';
       qtyInput.value = (row.qty !== undefined && row.qty !== null) ? row.qty : 1;
+      descInput.addEventListener('paste', pastePlain);
       priceInput.addEventListener('blur', function(){
         if(priceInput.value.trim() !== '' && isFinite(parseNum(priceInput.value))) priceInput.value = fmtNum(parseNum(priceInput.value));
       });
       function sync(){
-        row.desc = descInput.value;
+        row.desc = descInput.innerText.replace(/\n$/,'');
         row.price = priceInput.value.trim() === '' ? null : (parseNum(priceInput.value) || 0);
         row.qty = parseFloat(qtyInput.value) || 0;
         totalCell.textContent = fmt((row.price||0) * row.qty);
@@ -1210,9 +1225,6 @@
       descInput.addEventListener('input', onInput);
       priceInput.addEventListener('input', onInput);
       qtyInput.addEventListener('input', onInput);
-      descInput.addEventListener('keydown', function(e){
-        if(e.key === 'Enter'){ e.preventDefault(); if(i === items.length-1){ addRow(); } }
-      });
       tr.querySelector('.del button').addEventListener('click', function(){
         items = items.filter(function(r){ return r.id !== row.id; });
         if(!items.length) items.push({id:++rowSeq, desc:'', price:null, qty:1});
@@ -1262,16 +1274,16 @@
   function collect(){
     if(!cur) return null;
     if(isPf()) return collectPf();
-    cur.kname = $('k-name').value;
-    cur.kstreet = $('k-street').value;
-    cur.kcity = $('k-city').value;
+    cur.kname = fval('k-name');
+    cur.kstreet = fval('k-street');
+    cur.kcity = fval('k-city');
     cur.invno = $('inv-no').value.trim();
     cur.invdate = $('inv-date').value;
     cur.servicedate = $('service-date').value;
     cur.verkauf = verkaufToggle.checked;
-    cur.vmodel = $('v-model').value;
-    cur.vplate = $('v-plate').value;
-    cur.vfin = $('v-fin').value;
+    cur.vmodel = fval('v-model');
+    cur.vplate = fval('v-plate');
+    cur.vfin = fval('v-fin');
     cur.vez = $('v-ez').value;
     cur.vkm = $('v-km').value;
     cur.items = items.map(function(r){ return {desc:r.desc, price:r.price, qty:r.qty, details:r.details||''}; });
@@ -1287,9 +1299,9 @@
   }
 
   function collectPf(){
-    cur.kname = $('pf-k-name').value;
-    cur.kstreet = $('pf-k-street').value;
-    cur.kcity = $('pf-k-city').value;
+    cur.kname = fval('pf-k-name');
+    cur.kstreet = fval('pf-k-street');
+    cur.kcity = fval('pf-k-city');
     cur.kcountry = $('pf-k-country').value;
     cur.invno = $('pf-no').value.trim();
     cur.invdate = $('pf-date').value;
@@ -1344,9 +1356,9 @@
   function renderPf(){
     var d = ensurePf(cur);
     var t = d.pf;
-    $('pf-k-name').value = d.kname || '';
-    $('pf-k-street').value = d.kstreet || '';
-    $('pf-k-city').value = d.kcity || '';
+    fset('pf-k-name', d.kname);
+    fset('pf-k-street', d.kstreet);
+    fset('pf-k-city', d.kcity);
     $('pf-k-country').value = d.kcountry || '';
     $('pf-no').value = d.invno || '';
     $('pf-date').value = d.invdate || '';
@@ -1376,17 +1388,17 @@
     }
     var d = cur;
     var t = merge(settings.texts, d.texts || {});
-    $('k-name').value = d.kname || '';
-    $('k-street').value = d.kstreet || '';
-    $('k-city').value = d.kcity || '';
+    fset('k-name', d.kname);
+    fset('k-street', d.kstreet);
+    fset('k-city', d.kcity);
     $('inv-no').value = d.invno || '';
     $('inv-date').value = d.invdate || '';
     $('service-date').value = d.servicedate || '';
     verkaufToggle.checked = !!d.verkauf;
     applyVerkaufToggle();
-    $('v-model').value = d.vmodel || '';
-    $('v-plate').value = d.vplate || '';
-    $('v-fin').value = d.vfin || '';
+    fset('v-model', d.vmodel);
+    fset('v-plate', d.vplate);
+    fset('v-fin', d.vfin);
     $('v-ez').value = d.vez || '';
     $('v-km').value = d.vkm || '';
     $('inv-title').value = t.title || '';
@@ -1465,11 +1477,6 @@
   ['t-thanks','t-warranty-title','pf-salutation','pf-terms-title','pf-closing'].forEach(function(id){
     $(id).addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); } });
   });
-  function pastePlain(e){
-    e.preventDefault();
-    var text = (e.clipboardData || window.clipboardData).getData('text/plain');
-    document.execCommand('insertText', false, text);
-  }
   document.querySelectorAll('#page [contenteditable], #page-pf [contenteditable]').forEach(function(el){
     el.addEventListener('paste', pastePlain);
   });
