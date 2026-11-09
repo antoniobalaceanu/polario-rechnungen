@@ -944,37 +944,63 @@
   function sb(q){ return q.then(function(r){ if(r.error) throw new Error(r.error.message || String(r.error)); return r.data; }); }
   var store = {
     mode: 'local', db: null, downloads: null,
+    // Cloud nur benutzen, wenn sie wirklich antwortet. Sonst bleibt alles lokal.
     init: async function(){
+      if(!(window.supabase && SUPABASE_URL && SUPABASE_KEY)) return;
       try{
-        if(window.supabase && SUPABASE_URL && SUPABASE_KEY){
-          this.db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-          this.mode = 'cloud';
-        }
-      }catch(e){ console.error('store init', e); }
+        var db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        await sb(db.from('settings').select('id').limit(1));
+        this.db = db;
+        this.mode = 'cloud';
+      }catch(e){
+        console.warn('Cloud nicht erreichbar, lokale Speicherung', e && e.message);
+        this.db = null; this.mode = 'local';
+      }
     },
     loadInvoices: function(){
       return sb(this.db.from('invoices').select('data')).then(function(rows){ return rows.map(function(r){ return clone(r.data); }); });
     },
     loadAll: async function(){
-      if(this.mode === 'cloud'){
-        var s = await sb(this.db.from('settings').select('data').eq('id','main').maybeSingle());
+      var localInv = lsGet(LS_INVOICES); if(!Array.isArray(localInv)) localInv = [];
+      var localSet = lsGet(LS_SETTINGS);
+      if(this.mode !== 'cloud') return { settings: localSet, invoices: localInv };
+      try{
+        var row = await sb(this.db.from('settings').select('data').eq('id','main').maybeSingle());
         var list = await this.loadInvoices();
-        return { settings: s ? clone(s.data) : null, invoices: list };
+        // lokale Rechnungen, die in der Cloud fehlen oder neuer sind, behalten
+        var byId = {};
+        list.forEach(function(inv){ if(inv && inv.id) byId[inv.id] = inv; });
+        var pending = [];
+        localInv.forEach(function(inv){
+          if(!inv || !inv.id) return;
+          var remote = byId[inv.id];
+          if(!remote || (inv.updatedAt || 0) > (remote.updatedAt || 0)){ byId[inv.id] = inv; pending.push(inv); }
+        });
+        var merged = Object.keys(byId).map(function(k){ return byId[k]; });
+        var self = this;
+        pending.forEach(function(inv){ enqueue(function(){ return self.saveInvoice(inv); }); });
+        return { settings: (row ? clone(row.data) : null) || localSet, invoices: merged };
+      }catch(e){
+        console.warn('Cloud-Laden fehlgeschlagen, lokale Daten', e && e.message);
+        this.mode = 'local'; this.db = null;
+        return { settings: localSet, invoices: localInv };
       }
-      var inv = lsGet(LS_INVOICES);
-      return { settings: lsGet(LS_SETTINGS), invoices: Array.isArray(inv) ? inv : [] };
     },
+    // Lokal wird immer geschrieben; die Cloud ist nur eine Kopie obendrauf.
     saveSettings: function(s){
-      if(this.mode === 'cloud') return sb(this.db.from('settings').upsert({id:'main', data:clone(s)}));
-      return Promise.resolve(lsSet(LS_SETTINGS, s));
+      lsSet(LS_SETTINGS, s);
+      if(this.mode !== 'cloud') return Promise.resolve();
+      return sb(this.db.from('settings').upsert({id:'main', data:clone(s)})).catch(function(e){ console.warn('Cloud-Sync Einstellungen', e && e.message); });
     },
     saveInvoice: function(inv){
-      if(this.mode === 'cloud') return sb(this.db.from('invoices').upsert({id:inv.id, data:clone(inv)}));
-      return Promise.resolve(lsSet(LS_INVOICES, invoices));
+      lsSet(LS_INVOICES, invoices);
+      if(this.mode !== 'cloud') return Promise.resolve();
+      return sb(this.db.from('invoices').upsert({id:inv.id, data:clone(inv)})).catch(function(e){ console.warn('Cloud-Sync Rechnung', e && e.message); });
     },
     deleteInvoice: function(id){
-      if(this.mode === 'cloud') return sb(this.db.from('invoices').delete().eq('id', id));
-      return Promise.resolve(lsSet(LS_INVOICES, invoices));
+      lsSet(LS_INVOICES, invoices);
+      if(this.mode !== 'cloud') return Promise.resolve();
+      return sb(this.db.from('invoices').delete().eq('id', id)).catch(function(e){ console.warn('Cloud-Sync Löschen', e && e.message); });
     },
     subscribe: function(onInvoices, onSettings){
       if(this.mode !== 'cloud') return;
@@ -1946,15 +1972,13 @@
   store.init().then(function(){ return store.loadAll(); }).then(function(data){
     settings = migrateSettings(data.settings);
     invoices = migrateInvoices(data.invoices || []);
-    if(store.mode === 'local'){
-      lsSet(LS_SETTINGS, settings);
-      if(invoices.length) lsSet(LS_INVOICES, invoices);
-    }
+    lsSet(LS_SETTINGS, settings);
+    lsSet(LS_INVOICES, invoices);
     loaded = true;
     renderSettings();
     if(!hasContent(collect())){ cur = newInvoice(); render(); }
     else { checkDuplicateNo(); updatePageInfo(); }
-    setStatus((store.mode === 'cloud' ? 'Bereit (synchronisiert)' : 'Bereit') + ' – ' + docWord() + ' Nr. ' + cur.invno, '');
+    setStatus((store.mode === 'cloud' ? 'Bereit (synchronisiert)' : 'Bereit (auf diesem Gerät gespeichert)') + ' – ' + docWord() + ' Nr. ' + cur.invno, '');
     store.subscribe(function(list){
       invoices = migrateInvoices(list);
       if($('archive-panel').classList.contains('open')) refreshArchive();
@@ -1970,8 +1994,13 @@
     });
   }).catch(function(e){
     console.error(e);
+    var localInv = lsGet(LS_INVOICES);
+    invoices = migrateInvoices(Array.isArray(localInv) ? localInv : []);
+    settings = migrateSettings(lsGet(LS_SETTINGS));
     loaded = true;
-    setStatus('Daten konnten nicht geladen werden', 'warn');
+    renderSettings();
+    if(!hasContent(collect())){ cur = newInvoice(); render(); }
+    setStatus('Bereit (auf diesem Gerät gespeichert) – ' + docWord() + ' Nr. ' + cur.invno, 'warn');
   });
 })();
 </script>
