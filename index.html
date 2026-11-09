@@ -1622,6 +1622,20 @@
     var k = (cur.kname||'').trim().replace(/[^\wäöüÄÖÜß-]+/g,'_').replace(/^_+|_+$/g,'');
     return (isPf() ? 'Proforma_' : 'Rechnung_') + (cur.invno||'ohne_Nr') + (k ? '_' + k : '') + '.pdf';
   }
+  // Die gerenderte Seite wird proportional auf genau eine A4-Seite eingepasst.
+  function fitCanvasToA4(canvas){
+    var out = document.createElement('canvas');
+    out.width = canvas.width;
+    out.height = Math.floor(canvas.width * 297 / 210) - 4;   // minimal unter A4, sonst entsteht eine Leerseite
+    var ctx = out.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, out.width, out.height);
+    var k = Math.min(out.width / canvas.width, out.height / canvas.height);
+    var dw = Math.round(canvas.width * k), dh = Math.round(canvas.height * k);
+    ctx.drawImage(canvas, Math.round((out.width - dw) / 2), 0, dw, dh);
+    return out;
+  }
+
   var pdfRunning = false;
   $('btn-pdf').addEventListener('click', function(){
     if(pdfRunning) return;
@@ -1649,17 +1663,21 @@
     };
     function cleanup(){ document.body.classList.remove('pdf-mode'); applyMode(); if(busy.parentNode) busy.remove(); pdfRunning = false; }
     setTimeout(function(){
-      var worker = html2pdf().set(opt).from(activePageEl());
-      var p;
-      if(store.downloads){
-        // Gehostete App: Datei über die Plattform anbieten (funktioniert auch auf dem Handy)
-        p = worker.outputPdf('blob').then(function(blob){
-          cleanup();
-          return store.downloads.save({filename: filename, data: blob});
-        }).then(function(){ setStatus('PDF gespeichert: ' + filename, 'ok'); });
-      } else {
-        p = worker.save().then(function(){ cleanup(); setStatus('PDF heruntergeladen: ' + filename, 'ok'); });
-      }
+      // Seite rendern, auf genau eine A4-Seite einpassen, daraus das PDF bauen
+      var p = Promise.resolve(
+        html2pdf().set(opt).from(activePageEl()).toCanvas().get('canvas')
+      ).then(function(canvas){
+        cleanup();
+        var w2 = html2pdf().set({margin:0, filename:filename, image:{type:'jpeg', quality:0.97},
+          jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}}).from(fitCanvasToA4(canvas), 'canvas');
+        if(store.downloads){
+          // Gehostete App: Datei über die Plattform anbieten (funktioniert auch auf dem Handy)
+          return Promise.resolve(w2.outputPdf('blob')).then(function(blob){
+            return store.downloads.save({filename: filename, data: blob});
+          }).then(function(){ setStatus('PDF gespeichert: ' + filename, 'ok'); });
+        }
+        return Promise.resolve(w2.save()).then(function(){ setStatus('PDF heruntergeladen: ' + filename, 'ok'); });
+      });
       p.catch(function(e){
         cleanup();
         if(e && e.code === 'declined'){ setStatus('PDF-Speichern abgebrochen', 'warn'); return; }
