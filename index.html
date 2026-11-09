@@ -120,18 +120,30 @@
   .dup-warn{font-size:11px;color:var(--danger);font-style:italic;margin-top:2px;}
 
   .vbox{
-    background:var(--box-bg);border:1px solid var(--gold);margin-top:20px;
-    display:flex;padding:14px 20px 10px;gap:36px;flex-wrap:wrap;
+    background:var(--box-bg);border:1px solid var(--gold);margin-top:10px;
+    display:block;padding:10px 16px 8px;
   }
   .vbox .col{flex:1;min-width:220px;}
-  .vfield{font-size:13px;margin-bottom:6px;}
+  .vfield{font-size:13px;margin-bottom:4px;}
   .vfield b{font-weight:700;margin-right:4px;}
-  .vfield input, .vfield .mline{width:170px;max-width:100%;font-size:13px;}
-  .vfield .mline{display:inline-block;vertical-align:top;}
+  .vfield{display:flex;align-items:baseline;gap:4px;}
+  .vfield b{flex:0 0 auto;}
+  .vfield input, .vfield .mline{flex:1 1 auto;width:auto;min-width:0;max-width:100%;font-size:13px;}
+  .vfield .mline{display:block;}
 
   .verkauf-toggle{margin:12px 0 4px;font-size:12.5px;color:var(--gray);display:flex;align-items:center;gap:6px;}
+  .vcard{display:flex;gap:28px;flex-wrap:wrap;position:relative;}
+  .vcard > .col:first-of-type{flex:1.5 1 300px;}
+  .vcard > .col:last-of-type{flex:1 1 220px;}
+  .vcard .vdel + .col, .vcard .vnum + .col{flex:1.5 1 300px;}
+  .vcard + .vcard{margin-top:8px;padding-top:8px;border-top:1px dashed var(--gold-light);}
+  .vcard .vnum{flex:0 0 100%;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:1px;}
+  .vcard .vdel{position:absolute;top:0;right:0;}
+  .vcard:has(.vdel) > .col:last-of-type{padding-right:22px;}
+  .add-vehicle{margin-top:10px;}
+  .add-vehicle button{border:1px dashed #bbb;background:transparent;color:var(--gray);font-size:12.5px;padding:6px 12px;border-radius:4px;cursor:pointer;font-family:inherit;}
 
-  .thanks{font-style:italic;margin:20px 0 14px;font-size:14.5px;}
+  .thanks{font-style:italic;margin:14px 0 10px;font-size:14.5px;}
 
   .items-wrap{overflow-x:auto;}
   table.items{width:100%;border-collapse:collapse;margin-top:6px;}
@@ -342,10 +354,14 @@
   body.m-edit .verkauf-toggle input{width:22px;height:22px;flex:0 0 auto;margin:0;accent-color:var(--gold);}
   body.m-edit .vbox{background:transparent;border:none;padding:0;margin:0;display:block;}
   body.m-edit .vbox .col{min-width:0;}
+  body.m-edit .vcard{display:block;}
+  body.m-edit .vcard + .vcard{margin-top:14px;padding-top:12px;}
+  body.m-edit .vcard .vnum{margin:0 0 4px;}
+  body.m-edit .add-vehicle button{width:100%;padding:11px;font-size:14px;border-radius:8px;}
   body.m-edit .vbox .col .label{margin:8px 0 0;}
   body.m-edit .vbox .col.verkauf-only .label{display:none;}
-  body.m-edit .vfield{margin:0;font-size:inherit;}
-  body.m-edit .vfield .mline{width:100%;display:block;}
+  body.m-edit .vfield{margin:0;font-size:inherit;display:block;}
+  body.m-edit .vfield .mline, body.m-edit .vfield input{width:100%;display:block;}
   body.m-edit .thanks{margin:0;font-style:normal;}
   body.m-edit .items-sec .m-only{margin-top:14px;}
   body.m-edit .items-wrap{overflow:visible;}
@@ -529,19 +545,9 @@
     Fahrzeugverkauf (zeigt FIN, Erstzulassung, KM-Stand und Gewährleistungshinweis)
   </label>
 
-  <div class="vbox">
-    <div class="col">
-      <div class="label">Fahrzeugdaten</div>
-      <div class="vfield"><b>Marke / Modell:</b><div class="mline" id="v-model" contenteditable="true" data-placeholder="z. B. Mercedes Citan"></div></div>
-      <div class="vfield"><b>Kennzeichen:</b><div class="mline" id="v-plate" contenteditable="true" data-placeholder="z. B. A-JK-61"></div></div>
-    </div>
-    <div class="col verkauf-only" style="display:none;">
-      <div class="label">&nbsp;</div>
-      <div class="vfield"><b>FIN:</b><div class="mline" id="v-fin" contenteditable="true" data-placeholder="Fahrgestellnr."></div></div>
-      <div class="vfield"><b>Erstzulassung:</b><input id="v-ez" placeholder="TT.MM.JJJJ" autocomplete="off"></div>
-      <div class="vfield"><b>KM-Stand:</b><input id="v-km" placeholder="z. B. 84.000" autocomplete="off"></div>
-    </div>
-  </div>
+  <div class="label">Fahrzeugdaten</div>
+  <div class="vbox" id="vehicles-body"></div>
+  <div class="add-vehicle no-print"><button id="btn-add-vehicle" type="button">+ Fahrzeug hinzufügen</button></div>
   </div>
 
   <div class="sec items-sec">
@@ -858,7 +864,7 @@
     company:{name:'M G Autozentrum', street:'Daimlerstraße 2', city:'86707 Westendorf', tel:'0171-1111-835', email:'merdgurel@gmail.com', web:'www.mg-autozentrum.de'},
     logo: LOGO_DEFAULT_KEY,
     gf:'Merd Gürel',
-    bank:{name:'VR Bank', iban:'DE94 7009 1600 0006 2193 81', bic:'GEDEF1DSS', hint:'(bitte bei Bank prüfen)'},
+    bank:{name:'VR Bank', iban:'DE94 7009 1600 0006 2193 81', bic:'GEDEF1DSS', hint:''},
     tax:{label:'Steuernummer', no:'102/223/53446'},
     texts:{
       title:'RECHNUNG',
@@ -1005,6 +1011,7 @@
 
   function migrateSettings(s){
     s = merge(DEFAULTS, s);
+    if(s.bank && /bitte bei Bank/i.test(s.bank.hint || '')) s.bank.hint = '';
     if(s.texts && 'hint' in s.texts) delete s.texts.hint;          // alter E-Rechnungs-Hinweis wurde entfernt
     if(s.logo === DEFAULT_LOGO) s.logo = LOGO_DEFAULT_KEY;
     return s;
@@ -1014,10 +1021,26 @@
       if(!inv) return;
       if(inv.texts && 'hint' in inv.texts) delete inv.texts.hint;
       inv.doctype = inv.doctype === 'proforma' ? 'proforma' : 'rechnung';
+      ensureVehicles(inv);
     });
     return list.filter(function(inv){ return inv && inv.id; });
   }
 
+  // Fahrzeuge: Liste statt Einzelfeldern. Alte Rechnungen werden übernommen.
+  function ensureVehicles(d){
+    if(!d) return d;
+    if(!Array.isArray(d.vehicles) || !d.vehicles.length){
+      d.vehicles = [{model:d.vmodel||'', plate:d.vplate||'', fin:d.vfin||'', ez:d.vez||'', km:d.vkm||''}];
+    }
+    return d;
+  }
+  // erste Fahrzeugdaten zusätzlich in den alten Feldern spiegeln (Listen, Suche, Sicherungen)
+  function syncVehicleFields(d){
+    var v = (d.vehicles && d.vehicles[0]) || {};
+    d.vmodel = v.model || ''; d.vplate = v.plate || '';
+    d.vfin = v.fin || ''; d.vez = v.ez || ''; d.vkm = v.km || '';
+    return d;
+  }
   function findInvoice(id){ for(var i=0;i<invoices.length;i++){ if(invoices[i].id === id) return i; } return -1; }
   function numPart(no){ var m = String(no == null ? '' : no).match(/(\d+)\s*$/); return m ? parseInt(m[1],10) : NaN; }
   function nextNoFor(type){
@@ -1036,7 +1059,7 @@
   function hasContent(inv){
     if(!inv) return false;
     if((inv.kname||'').trim() || (inv.kstreet||'').trim() || (inv.kcity||'').trim()) return true;
-    if((inv.vmodel||'').trim() || (inv.vplate||'').trim() || (inv.vfin||'').trim()) return true;
+    if((inv.vehicles||[]).some(function(v){ return (v.model||'').trim() || (v.plate||'').trim() || (v.fin||'').trim(); })) return true;
     return (inv.items||[]).some(function(r){ return (r.desc||'').trim() || (parseFloat(r.price)||0) > 0; });
   }
   function newInvoice(type){
@@ -1045,6 +1068,7 @@
       id: uid(), doctype: type, invno: nextNoFor(type), invdate: todayStr(), servicedate: todayStr(),
       kname:'', kstreet:'', kcity:'', kcountry: type === 'proforma' ? (settings.proforma.country || '') : '',
       verkauf:false, vmodel:'', vplate:'', vfin:'', vez:'', vkm:'',
+      vehicles:[{model:'', plate:'', fin:'', ez:'', km:''}],
       items:[{desc:'',price:null,qty:1}],
       texts: clone(settings.texts),
       createdAt: Date.now(), updatedAt: Date.now()
@@ -1262,7 +1286,51 @@
   $('pf-add-row').addEventListener('click', function(){ addRow(); scheduleSave(); });
   $('pf-vat').addEventListener('change', function(){ updateTotal(); scheduleSave(); });
 
-  /* ---------- Fahrzeugverkauf ---------- */
+  /* ---------- Fahrzeuge ---------- */
+  var vehiclesBody = $('vehicles-body');
+  var vehicles = [];
+
+  function renderVehicles(){
+    vehiclesBody.innerHTML = '';
+    vehicles.forEach(function(v, i){
+      var card = document.createElement('div');
+      card.className = 'vcard';
+      card.innerHTML =
+        (vehicles.length > 1 ? '<div class="vnum">Fahrzeug ' + (i+1) + '</div>' : '') +
+        '<div class="col">' +
+          '<div class="vfield"><b>Marke / Modell:</b><div class="mline" data-v="model" contenteditable="true" data-placeholder="z. B. Audi S5"></div></div>' +
+          '<div class="vfield"><b>Kennzeichen:</b><div class="mline" data-v="plate" contenteditable="true" data-placeholder="z. B. A-JK-61"></div></div>' +
+        '</div>' +
+        '<div class="col">' +
+          '<div class="vfield"><b>FIN:</b><div class="mline" data-v="fin" contenteditable="true" data-placeholder="Fahrgestellnr."></div></div>' +
+          '<div class="vfield verkauf-only" style="display:none;"><b>Erstzulassung:</b><input data-v="ez" placeholder="TT.MM.JJJJ" autocomplete="off"></div>' +
+          '<div class="vfield verkauf-only" style="display:none;"><b>KM-Stand:</b><input data-v="km" placeholder="z. B. 84.000" autocomplete="off"></div>' +
+        '</div>' +
+        (vehicles.length > 1 ? '<div class="vdel no-print"><button type="button" class="icon-btn" title="Fahrzeug entfernen">×</button></div>' : '');
+      card.querySelectorAll('[data-v]').forEach(function(el){
+        var key = el.getAttribute('data-v');
+        fset(el, v[key]);
+        el.addEventListener('input', function(){ v[key] = fval(el); scheduleSave(); });
+        if(el.isContentEditable) el.addEventListener('paste', pastePlain);
+      });
+      var del = card.querySelector('.vdel button');
+      if(del) del.addEventListener('click', function(){
+        vehicles.splice(i, 1);
+        if(!vehicles.length) vehicles.push({model:'', plate:'', fin:'', ez:'', km:''});
+        renderVehicles(); scheduleSave();
+      });
+      vehiclesBody.appendChild(card);
+    });
+    applyVerkaufToggle();
+  }
+  function addVehicle(){
+    vehicles.push({model:'', plate:'', fin:'', ez:'', km:''});
+    renderVehicles();
+    var last = vehiclesBody.querySelectorAll('[data-v="model"]');
+    if(last.length) last[last.length-1].focus();
+  }
+  $('btn-add-vehicle').addEventListener('click', function(){ addVehicle(); scheduleSave(); });
+
   var verkaufToggle = $('verkauf-toggle');
   function applyVerkaufToggle(){
     var show = verkaufToggle.checked;
@@ -1281,11 +1349,8 @@
     cur.invdate = $('inv-date').value;
     cur.servicedate = $('service-date').value;
     cur.verkauf = verkaufToggle.checked;
-    cur.vmodel = fval('v-model');
-    cur.vplate = fval('v-plate');
-    cur.vfin = fval('v-fin');
-    cur.vez = $('v-ez').value;
-    cur.vkm = $('v-km').value;
+    cur.vehicles = vehicles.map(function(v){ return {model:v.model||'', plate:v.plate||'', fin:v.fin||'', ez:v.ez||'', km:v.km||''}; });
+    syncVehicleFields(cur);
     cur.items = items.map(function(r){ return {desc:r.desc, price:r.price, qty:r.qty, details:r.details||''}; });
     cur.texts = {
       title: $('inv-title').value,
@@ -1396,11 +1461,9 @@
     $('service-date').value = d.servicedate || '';
     verkaufToggle.checked = !!d.verkauf;
     applyVerkaufToggle();
-    fset('v-model', d.vmodel);
-    fset('v-plate', d.vplate);
-    fset('v-fin', d.vfin);
-    $('v-ez').value = d.vez || '';
-    $('v-km').value = d.vkm || '';
+    ensureVehicles(d);
+    vehicles = d.vehicles.map(function(v){ return {model:v.model||'', plate:v.plate||'', fin:v.fin||'', ez:v.ez||'', km:v.km||''}; });
+    renderVehicles();
     $('inv-title').value = t.title || '';
     $('t-thanks').textContent = t.thanks || '';
     $('t-notes').textContent = t.notes || '';
@@ -1615,7 +1678,10 @@
     });
   }
   function vehicleStr(inv){
-    var v = [inv.vmodel, inv.vplate].filter(function(s){ return s && s.trim(); }).join(' · ');
+    var list = (inv.vehicles || []).map(function(x){
+      return [x.model, x.plate].filter(function(t){ return t && t.trim(); }).join(' ');
+    }).filter(Boolean);
+    var v = list.length ? list.join(' · ') : [inv.vmodel, inv.vplate].filter(function(t){ return t && t.trim(); }).join(' · ');
     if(v) return v;
     if(inv.doctype === 'proforma'){ var first = (inv.items||[])[0]; return first ? (first.desc || '') : ''; }
     return '';
@@ -1657,7 +1723,8 @@
     $('all-count').textContent = '(' + list.length + ')';
     if(q){
       list = list.filter(function(inv){
-        var hay = [inv.invno, inv.invdate, inv.servicedate, inv.kname, inv.kstreet, inv.kcity, inv.vmodel, inv.vplate, inv.vfin, docWord(inv),
+        var hay = [inv.invno, inv.invdate, inv.servicedate, inv.kname, inv.kstreet, inv.kcity, docWord(inv),
+          (inv.vehicles||[]).map(function(x){ return [x.model, x.plate, x.fin].join(' '); }).join(' '),
           (inv.items||[]).map(function(it){ return it.desc; }).join(' ')].join(' ').toLowerCase();
         return hay.indexOf(q) >= 0;
       });
